@@ -12,9 +12,26 @@ The site is a standard Next.js 15 server (Node 22). A Node runtime is required b
 - [ ] Decide where trial-lesson leads should arrive (see §3).
 - [ ] `npm run check` passes locally (lint + typecheck + build). CI runs the same on every PR touching `web/`.
 
-## 1. Option A — Render (Blueprint, same account as the Telegram bot)
+## 1. Render — the live service
 
-`render.yaml` at the repository root already contains the service:
+The web service already exists in the Render workspace **"step's workspace"** (same account as the Telegram bot):
+
+| | |
+|---|---|
+| Service | `step-school-kids-web` (`srv-daj6puuk1f9s73cg8r8g`) |
+| Live URL | https://step-school-kids-web.onrender.com |
+| Dashboard | https://dashboard.render.com/web/srv-daj6puuk1f9s73cg8r8g |
+| Region / plan | Frankfurt / free |
+| Build | `cd web && npm ci && npm run build` |
+| Start | `cd web && npm run start` |
+| Env | `NODE_VERSION=22` (+ the two lead vars from §3 when ready) |
+| Branch | `claude/nifty-dirac-l9jacn` until the PR is merged → then switch to `main` (*Settings → Build & Deploy → Branch*) |
+
+Auto-deploy is on: every push to the configured branch redeploys the site.
+
+### Re-creating from the Blueprint (only if the service is ever deleted)
+
+`render.yaml` at the repository root also describes the service:
 
 ```yaml
 - type: web
@@ -26,18 +43,21 @@ The site is a standard Next.js 15 server (Node 22). A Node runtime is required b
   healthCheckPath: /
 ```
 
-1. Render dashboard → **New → Blueprint** → select the `stepschoolkids-boop/step-school` repository → branch `main`.
-2. Render reads `render.yaml` and proposes both services (the existing bot + `step-school-kids-web`). Approve only the web service if the bot already exists.
-3. Fill the two `sync: false` env vars (§3). Leave them empty if leads are not wired yet — the form then shows call/Telegram fallbacks.
-4. Deploy. The service gets a `*.onrender.com` URL — check it with the §4 list.
-5. **Custom domain**: service → *Settings → Custom Domains* → add `stepschoolkids.uz` and `www.stepschoolkids.uz`. Render shows the exact records to create; at the time of writing they are:
+Render dashboard → **New → Blueprint** → repository `stepschoolkids-boop/step-school` → branch `main` → approve only the web service (the bot already exists) → fill the `sync: false` env vars.
+
+### Connecting stepschoolkids.uz
+
+1. Dashboard → `step-school-kids-web` → **Settings → Custom Domains → Add Custom Domain** → enter `stepschoolkids.uz`. Render automatically adds `www.stepschoolkids.uz` as well (it redirects to the apex).
+2. Render shows the exact DNS records. At the time of writing they are:
 
    | Type | Name | Value |
    |---|---|---|
    | A | `@` | `216.24.57.1` |
    | CNAME | `www` | `step-school-kids-web.onrender.com` |
 
-   TLS certificates are issued automatically once DNS resolves.
+3. Create those two records at the registrar / DNS provider of `stepschoolkids.uz` (a `.uz` domain is usually managed at the registrar's panel or in Cloudflare). Remove any old A/CNAME records for `@` and `www` first.
+4. Wait for propagation (minutes to a few hours), then press **Verify** in Render. A TLS certificate is issued automatically and the site answers on https://stepschoolkids.uz.
+5. Run the §4 checklist against the real domain.
 
 Notes: the `free` plan sleeps after inactivity, which adds a cold-start delay for the first visitor.
 For a marketing site receiving paid Instagram/Telegram traffic, use the `starter` plan (change `plan:` in `render.yaml`).
