@@ -61,7 +61,7 @@ export type ContactInfo = {
 
 export const CONTACT: ContactInfo = {
   phone: "+998 99 141 49 48",
-  telegramUsername: "Stepschooladmin_Malika",
+  telegramUsername: "bdrshdvn",
   instagramUrl: null,
   address: null,
   mapEmbedUrl: null,
