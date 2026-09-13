@@ -1,3 +1,16 @@
+# STEP SCHOOL — repository
+
+Two projects live here:
+
+| Folder | What | Docs |
+|---|---|---|
+| `web/` | **stepschoolkids.uz** — STEP SCHOOL KIDS website (Next.js, Uzbek-first, mobile-first) | [`web/README.md`](web/README.md) |
+| `app/`, `main.py` | Step Multilevel — automatic Telegram post bot (Python) | below |
+
+Deployment for both services is described in `render.yaml` (the website can also be deployed to Vercel with *Root Directory* = `web`).
+
+---
+
 # Step Multilevel — avtomatik Telegram post boti
 
 CEFR Multilevel mavzusida har kuni 3 ta post: yangilik qidiradi, matn yozadi,
