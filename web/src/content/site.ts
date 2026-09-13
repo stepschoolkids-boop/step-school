@@ -39,12 +39,11 @@ export const FACTS = {
 
 export type ContactInfo = {
   /**
-   * Source: the school's existing Telegram bot configuration in this repository
-   * (app/config.py → POST_FOOTER). Confirm it is the number parents should call
-   * for the KIDS programme; set to `null` to hide.
+   * Official STEP SCHOOL KIDS contact — CONFIRMED by the school (Sept 2026).
+   * Source: the school's Telegram bot configuration in this repository (app/config.py).
    */
   phone: string | null;
-  /** Same source as `phone`. */
+  /** Official STEP SCHOOL KIDS admin Telegram — CONFIRMED by the school (Sept 2026). */
   telegramUsername: string | null;
   /** TODO: add the Kids Instagram profile URL when available. */
   instagramUrl: string | null;

@@ -47,8 +47,8 @@ Fields that are not verified are `null`/empty and the UI renders an honest fallb
 - **Real book covers** → drop files in `public/books/` and set `cover` in `books.ts`
 - **"We'll contact you within 1 hour"** → `site.ts` (`RESPONSE_PROMISE`) once approved
 
-The phone number and Telegram handle come from the school's existing bot config in this
-repository (`app/config.py`). Confirm they are the right contacts for the Kids programme.
+The phone number and Telegram handle are the official STEP SCHOOL KIDS contacts, confirmed by the
+school (they are shared with the school's Telegram bot config in `app/config.py`).
 
 ## Trial-lesson form
 
@@ -81,13 +81,9 @@ Phase-2 pages (Kitoblar, Ota-onalar uchun, Natijalar, Biz haqimizda) can be adde
 
 ## Deployment
 
-The app is a standard Next.js server (needed for the `/api/trial` route and OG image).
-
-**Vercel** — import the repo, set *Root Directory* to `web`, add the two env vars. Then add
-`stepschoolkids.uz` as a domain and point DNS to Vercel (do this only when ready).
-
-**Render** — `render.yaml` at the repository root defines a `step-school-kids-web` Node web service
-with `rootDir: web`. Add the env vars in the Render dashboard.
+See [`DEPLOYMENT.md`](DEPLOYMENT.md) for the full checklist (Render or Vercel, env vars,
+custom domain `stepschoolkids.uz`, post-launch checks). `npm run check` runs lint + typecheck + build,
+the same as CI (`.github/workflows/web-ci.yml`).
 
 Accessibility and motion: semantic landmarks, one `h1`, labelled form fields, visible focus
 states, `prefers-reduced-motion` disables parallax and cinematic motion while keeping all content.
