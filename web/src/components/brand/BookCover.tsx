@@ -34,7 +34,7 @@ export function BookCover({ book, className = "", priority = false }: { book: Bo
         />
       ) : (
         <div
-          className="absolute inset-0 overflow-hidden rounded-[6px_16px_16px_6px]"
+          className="@container absolute inset-0 overflow-hidden rounded-[6px_16px_16px_6px]"
           style={{ background: `linear-gradient(160deg, ${t.from}, ${t.to})`, color: t.ink }}
           role="img"
           aria-label={`${book.title} — ${book.concept}. ${book.step}-kitob muqovasi`}
@@ -47,20 +47,20 @@ export function BookCover({ book, className = "", priority = false }: { book: Bo
           <Footprint className="absolute -right-6 -top-6 w-[42%] rotate-[22deg] fill-white/15" />
           <Footprint className="absolute -left-2 bottom-[28%] w-[26%] -rotate-[18deg] fill-white/10" />
 
-          <div className="absolute left-[16%] right-[8%] top-[9%] flex items-center justify-between">
-            <span className="rounded-full bg-black/15 px-2.5 py-1 text-[0.6rem] font-extrabold uppercase tracking-[0.2em]">
+          <div className="absolute left-[16%] right-[8%] top-[9%] flex items-center justify-between [container-type:inline-size]">
+            <span className="rounded-full bg-black/15 px-2 py-0.5 text-[clamp(0.32rem,3.2cqw,0.6rem)] font-extrabold uppercase tracking-[0.2em]">
               Step 0{book.step}
             </span>
-            <span className="text-[0.6rem] font-bold uppercase tracking-[0.18em] opacity-80">Kids</span>
+            <span className="text-[clamp(0.32rem,3.2cqw,0.6rem)] font-bold uppercase tracking-[0.18em] opacity-80">Kids</span>
           </div>
 
-          <div className="absolute left-[16%] right-[8%] top-[24%]">
-            <p className="font-display text-[clamp(1.4rem,7cqw,2.2rem)] font-bold leading-[0.95] tracking-tight [container-type:inline-size]">
+          <div className="absolute left-[16%] right-[8%] top-[24%] hidden @min-[120px]:block">
+            <p className="font-display text-[clamp(0.7rem,8.5cqw,2.2rem)] font-bold leading-[0.95] tracking-tight [container-type:inline-size]">
               {book.title.split(",")[0]},
               <br />
               Riko!
             </p>
-            <p className="mt-2 text-[0.72rem] font-semibold uppercase tracking-[0.16em] opacity-85">{book.conceptEn}</p>
+            <p className="mt-2 text-[clamp(0.38rem,4cqw,0.72rem)] font-semibold uppercase tracking-[0.16em] opacity-85 [container-type:inline-size]">{book.conceptEn}</p>
           </div>
 
           <Riko className="absolute -bottom-[6%] -right-[8%] w-[70%] drop-shadow-[0_12px_18px_rgba(0,0,0,0.25)]" />

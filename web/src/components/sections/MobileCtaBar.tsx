@@ -39,11 +39,11 @@ export function MobileCtaBar() {
           className="fixed inset-x-3 bottom-3 z-40 flex gap-2 sm:hidden"
           style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
         >
-          <Link href={CTA.href} className="btn-primary inline-flex h-13 flex-1 items-center justify-center gap-2 rounded-full font-display font-semibold">
+          <Link href={CTA.href} className="btn-primary inline-flex h-13 flex-1 items-center justify-center gap-2 rounded-full font-bold">
             {CTA.full} <Icon name="arrow" className="size-4" />
           </Link>
           {CONTACT.phone && (
-            <a href={telHref(CONTACT.phone)} aria-label={`Qo‘ng‘iroq: ${CONTACT.phone}`} className="grid size-13 place-items-center rounded-full bg-ink text-white shadow-[var(--shadow-soft)]">
+            <a href={telHref(CONTACT.phone)} aria-label={`Qo‘ng‘iroq: ${CONTACT.phone}`} className="nav-glass grid size-13 place-items-center rounded-full border border-white/15 text-white">
               <Icon name="phone" className="size-5" />
             </a>
           )}

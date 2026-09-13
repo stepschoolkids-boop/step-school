@@ -1,64 +1,50 @@
 import Link from "next/link";
 import { Footprint } from "@/components/brand/Footprint";
 import { Logo } from "@/components/brand/Logo";
-import { Icon } from "@/components/ui/Icon";
 import { NAV_ITEMS } from "@/content/nav";
 import { CONTACT, SITE, telHref, telegramHref } from "@/content/site";
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-ink/10 bg-cream-2">
-      <Footprint className="absolute -bottom-10 -right-6 w-56 rotate-[-16deg] fill-ink/[0.05]" />
-      <div className="container-x py-12">
-        <div className="grid gap-10 md:grid-cols-[1.2fr_1fr_1fr]">
-          <div>
-            <Logo />
-            <p className="mt-4 max-w-sm text-pretty text-ink-soft">{SITE.tagline}. Riko bilan 4 kitob, 1 yil, 156 dars.</p>
-            <p className="mt-4 font-display text-lg font-semibold text-green-deep">{SITE.motto}</p>
-          </div>
-          <nav aria-label="Sayt bo‘limlari">
-            <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-ink-mute">Bo‘limlar</p>
-            <ul className="mt-3 grid gap-2">
-              {NAV_ITEMS.map((i) => (
-                <li key={i.href}>
-                  <Link href={i.href} className="font-semibold text-ink-soft hover:text-ink">
-                    {i.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-          <div>
-            <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-ink-mute">Aloqa</p>
-            <ul className="mt-3 grid gap-2.5">
-              {CONTACT.phone && (
-                <li>
-                  <a href={telHref(CONTACT.phone)} className="inline-flex items-center gap-2 font-semibold text-ink-soft hover:text-ink">
-                    <Icon name="phone" className="size-4 text-green" /> {CONTACT.phone}
-                  </a>
-                </li>
-              )}
-              {CONTACT.telegramUsername && (
-                <li>
-                  <a href={telegramHref(CONTACT.telegramUsername)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-semibold text-ink-soft hover:text-ink">
-                    <Icon name="telegram" className="size-4 text-sky-deep" /> @{CONTACT.telegramUsername}
-                  </a>
-                </li>
-              )}
-              {CONTACT.instagramUrl && (
-                <li>
-                  <a href={CONTACT.instagramUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-semibold text-ink-soft hover:text-ink">
-                    <Icon name="instagram" className="size-4 text-coral" /> Instagram
-                  </a>
-                </li>
-              )}
-            </ul>
-          </div>
+    <footer className="relative overflow-hidden border-t border-white/10 bg-navy-950">
+      <Footprint className="pointer-events-none absolute -bottom-12 -right-8 w-64 rotate-[-16deg] fill-white/[0.03]" aria-hidden="true" />
+      <div className="container-x flex flex-col gap-8 py-10 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col gap-3">
+          <Logo />
+          <p className="text-sm text-white/50">{SITE.tagline}</p>
+          <p className="font-display text-xs font-semibold uppercase tracking-[0.2em] text-green/80">{SITE.motto}</p>
         </div>
-        <div className="mt-10 flex flex-col gap-2 border-t border-ink/10 pt-6 text-sm text-ink-mute sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} {SITE.name}. Barcha huquqlar himoyalangan.</p>
-          <p>{SITE.domain}</p>
-        </div>
+        <nav aria-label="Sayt bo‘limlari">
+          <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-white/60">
+            {NAV_ITEMS.map((i) => (
+              <li key={i.href}>
+                <Link href={i.href} className="hover:text-white">
+                  {i.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <ul className="flex flex-col gap-1.5 text-sm font-semibold text-white/60">
+          {CONTACT.phone && (
+            <li>
+              <a href={telHref(CONTACT.phone)} className="hover:text-white">
+                {CONTACT.phone}
+              </a>
+            </li>
+          )}
+          {CONTACT.telegramUsername && (
+            <li>
+              <a href={telegramHref(CONTACT.telegramUsername)} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                @{CONTACT.telegramUsername}
+              </a>
+            </li>
+          )}
+        </ul>
+      </div>
+      <div className="container-x flex flex-col gap-1 border-t border-white/10 py-5 text-xs text-white/35 sm:flex-row sm:justify-between">
+        <p>© {new Date().getFullYear()} {SITE.name}</p>
+        <p>{SITE.domain}</p>
       </div>
     </footer>
   );
