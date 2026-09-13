@@ -26,3 +26,21 @@ services:
         sync: false
       - key: LEAD_MINUTES
         value: "10"
+
+  # --- Website: stepschoolkids.uz (Next.js, lives in /web) ---
+  - type: web
+    name: step-school-kids-web
+    runtime: node
+    plan: free
+    region: frankfurt
+    rootDir: web
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: TRIAL_TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TRIAL_TELEGRAM_CHAT_ID
+        sync: false
