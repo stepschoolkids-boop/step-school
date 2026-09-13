@@ -9,8 +9,16 @@ Production domain (to be connected): **https://stepschoolkids.uz**
 
 - Next.js 15 (App Router) · React 19 · TypeScript
 - Tailwind CSS v4 (design tokens in `src/app/globals.css`)
-- `motion` (Framer Motion) for scroll-linked and entrance animation
+- `motion` (Framer Motion) for the hero entrance choreography, sticky scroll scenes and reveals
 - No UI kit, no icon library — Riko, the footprint mark, book covers and icons are hand-drawn SVG components
+
+## Visual system (v2)
+
+Navy foundation (`#050a17` → `#0d1a3a`), blue and green light, white type. Display face **Unbounded**,
+body **Manrope**. Footprints are the recurring motif; Riko is the guide. One continuous story:
+hero entrance (footprint → path → Riko → kinetic "STEP" → tagline → CTA) → sticky START/SPEAK/READ/WIN
+scene → books shelf → 1 yil / 156 dars → 90-minute lesson → trust & terms → "Birinchi qadam shu yerdan
+boshlanadi" form. All motion is transform/opacity only and collapses under `prefers-reduced-motion`.
 
 ## Run
 
@@ -30,10 +38,9 @@ All business content is data, separate from UI, under `src/content/`:
 |---|---|
 | `site.ts` | Name, domain, verified facts (150 students, 13 groups, 90-min lessons…), **contact data**, response promise |
 | `books.ts` | The 4 books (Start/Speak/Read/Win, Riko!) and the 12 verified book differentiators |
-| `benefits.ts` | The 4 "Why STEP SCHOOL KIDS" cards |
 | `lesson.ts` | Stages of the 90-minute lesson (no per-stage timings — not verified) |
 | `schedule.ts` | Group schedule + pricing structures (**empty until real data exists**) |
-| `teachers.ts` | Teacher profiles (**empty until real data exists**) + verified teacher-selection principle |
+| `teachers.ts` | Teacher profiles (**empty until real data exists**) — rendered as compact chips in the trust band |
 | `nav.ts` | Navigation and CTA labels |
 
 ### Rule: nothing invented
@@ -70,8 +77,8 @@ src/app/            layout (fonts, metadata, JSON-LD), page, api/trial, robots, 
 src/components/
   brand/            Riko, Footprint, Logo, BookCover
   ui/               Button (magnetic), Reveal, SectionHeading, CountUp, Icon
-  sections/         Navbar, Hero, FootprintJourney, Benefits, BooksShowcase, CurriculumTimeline,
-                    LessonFlow, Teachers, TrustSection, Schedule, TrialForm, Contact, Footer, MobileCtaBar
+  sections/         Navbar, Hero, Journey, Books, Stats, LessonTimeline, TrustBand,
+                    FinalCta (+ TrialForm), Footer, MobileCtaBar
 src/content/        all copy and business data
 src/lib/motion.ts   shared easing/variants + reduced-motion hook
 ```

@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Fredoka, Manrope } from "next/font/google";
+import { Manrope, Unbounded } from "next/font/google";
 import { CONTACT, SITE, telegramHref } from "@/content/site";
 import "./globals.css";
 
-const display = Fredoka({
+const display = Unbounded({
   subsets: ["latin", "latin-ext"],
-  weight: ["500", "600", "700"],
+  weight: ["500", "600", "700", "800"],
   variable: "--font-display",
   display: "swap",
 });
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#fff8ec",
+  themeColor: "#050a17",
   width: "device-width",
   initialScale: 1,
 };

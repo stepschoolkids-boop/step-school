@@ -7,33 +7,28 @@ type Props = {
   title: ReactNode;
   text?: ReactNode;
   align?: "left" | "center";
-  tone?: "light" | "dark";
   id?: string;
+  size?: "md" | "lg";
 };
 
-export function SectionHeading({ eyebrow, title, text, align = "left", tone = "light", id }: Props) {
+export function SectionHeading({ eyebrow, title, text, align = "left", id, size = "md" }: Props) {
   const center = align === "center";
   return (
     <div className={`max-w-3xl ${center ? "mx-auto text-center" : ""}`}>
       <Reveal>
-        <p className={`eyebrow ${tone === "dark" ? "text-sun" : ""} ${center ? "justify-center" : ""}`}>
-          <Footprint className="size-3.5 fill-current" />
+        <p className={`eyebrow ${center ? "justify-center" : ""}`}>
+          <Footprint className="size-3 fill-current" />
           {eyebrow}
         </p>
       </Reveal>
       <Reveal delay={0.06}>
-        <h2
-          id={id}
-          className={`headline mt-4 text-balance text-[clamp(2rem,5.2vw,3.4rem)] ${tone === "dark" ? "text-white" : "text-ink"}`}
-        >
+        <h2 id={id} className={`headline mt-5 text-balance text-white ${size === "lg" ? "text-[clamp(2.2rem,6vw,4.4rem)]" : "text-[clamp(1.9rem,4.6vw,3.2rem)]"}`}>
           {title}
         </h2>
       </Reveal>
       {text && (
         <Reveal delay={0.12}>
-          <p className={`mt-5 text-pretty text-[1.05rem] leading-relaxed sm:text-lg ${tone === "dark" ? "text-white/75" : "text-ink-soft"}`}>
-            {text}
-          </p>
+          <p className="mt-5 max-w-xl text-pretty text-[1.02rem] leading-relaxed text-white/65 sm:text-lg">{text}</p>
         </Reveal>
       )}
     </div>

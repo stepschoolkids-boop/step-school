@@ -1,22 +1,18 @@
 import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
-import { FootprintJourney } from "@/components/sections/FootprintJourney";
-import { Benefits } from "@/components/sections/Benefits";
-import { BooksShowcase } from "@/components/sections/BooksShowcase";
-import { CurriculumTimeline } from "@/components/sections/CurriculumTimeline";
-import { LessonFlow } from "@/components/sections/LessonFlow";
-import { Teachers } from "@/components/sections/Teachers";
-import { TrustSection } from "@/components/sections/TrustSection";
-import { Schedule } from "@/components/sections/Schedule";
-import { TrialForm } from "@/components/sections/TrialForm";
-import { Contact } from "@/components/sections/Contact";
+import { Journey } from "@/components/sections/Journey";
+import { Books } from "@/components/sections/Books";
+import { Stats } from "@/components/sections/Stats";
+import { LessonTimeline } from "@/components/sections/LessonTimeline";
+import { TrustBand } from "@/components/sections/TrustBand";
+import { FinalCta } from "@/components/sections/FinalCta";
 import { Footer } from "@/components/sections/Footer";
 import { MobileCtaBar } from "@/components/sections/MobileCtaBar";
 
 /**
- * Homepage = one scrolling story:
- * STEP → DISCOVER → SPEAK → READ → WIN, with Riko as the guide
- * and the trial-lesson form as the destination.
+ * One continuous story: STEP → START → SPEAK → READ → WIN.
+ * Hero (cinematic entrance) → sticky journey → books → 1 year / 156 lessons →
+ * 90-minute lesson → trust & terms → first step (form).
  */
 export default function HomePage() {
   return (
@@ -24,16 +20,12 @@ export default function HomePage() {
       <Navbar />
       <main id="asosiy">
         <Hero />
-        <FootprintJourney />
-        <Benefits />
-        <BooksShowcase />
-        <CurriculumTimeline />
-        <LessonFlow />
-        <Teachers />
-        <TrustSection />
-        <Schedule />
-        <TrialForm />
-        <Contact />
+        <Journey />
+        <Books />
+        <Stats />
+        <LessonTimeline />
+        <TrustBand />
+        <FinalCta />
       </main>
       <Footer />
       <MobileCtaBar />

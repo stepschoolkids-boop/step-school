@@ -5,9 +5,8 @@ export type NavItem = { label: string; href: string };
  * Biz haqimizda) can switch these hrefs to real routes without touching the UI.
  */
 export const NAV_ITEMS: NavItem[] = [
-  { label: "Kurs", href: "#kurs" },
+  { label: "Yo‘l", href: "#yol" },
   { label: "Kitoblar", href: "#kitoblar" },
-  { label: "O‘qituvchilar", href: "#oqituvchilar" },
   { label: "Darslar", href: "#darslar" },
   { label: "Narxlar", href: "#narxlar" },
   { label: "Aloqa", href: "#aloqa" },

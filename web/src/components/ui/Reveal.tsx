@@ -8,6 +8,7 @@ type RevealProps = HTMLMotionProps<"div"> & {
   y?: number;
   once?: boolean;
   as?: "div" | "section" | "li" | "article" | "span" | "p" | "h2" | "h3";
+  id?: string;
 };
 
 /** Scroll-triggered entrance. Falls back to a simple fade when reduced motion is on. */

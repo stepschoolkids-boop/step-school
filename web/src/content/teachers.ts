@@ -14,9 +14,3 @@ export type Teacher = {
  * teacher selection in the meantime — never invented profiles.
  */
 export const TEACHERS: Teacher[] = [];
-
-/** Verified statement supplied by the school. */
-export const TEACHER_PRINCIPLE = {
-  title: "O‘qituvchilar bolalar bilan ishlash mezonlari bo‘yicha baholanadi",
-  text: "STEP SCHOOL KIDS o‘qituvchilari aniq mezonlar asosida baholanadi. Bu mezonlar bolalarga o‘qitishning o‘ziga xos jihatlarini hisobga oladi — chunki bola bilan ishlash kattalar bilan ishlashdan farq qiladi.",
-} as const;
