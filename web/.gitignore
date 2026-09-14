@@ -52,3 +52,4 @@ next-env.d.ts
 .sect.mjs
 .bound.mjs
 .trust.mjs
+.formtest.mjs

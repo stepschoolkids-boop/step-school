@@ -77,16 +77,20 @@ Phone (+998 99 141 49 48), both Telegram handles (@Stepschooladmin_Muslima, @ste
 
 ## Trial-lesson form
 
-`src/components/sections/TrialForm.tsx` posts to `src/app/api/trial/route.ts`.
-The endpoint validates the lead and forwards it to a Telegram chat when these env vars are set:
+`src/components/sections/TrialForm.tsx` posts to `src/app/api/trial/route.ts`, which validates and writes the
+lead to a **Google Sheet** through an Apps Script Web App (`scripts/apps-script/`), with Telegram as an optional
+second channel:
 
 ```
-TRIAL_TELEGRAM_BOT_TOKEN=<bot token>
-TRIAL_TELEGRAM_CHAT_ID=<chat id that receives leads>
+SHEETS_WEBAPP_URL=<Apps Script /exec URL>
+SHEETS_WEBAPP_SECRET=<shared secret>
+TRIAL_TELEGRAM_BOT_TOKEN=<optional>
+TRIAL_TELEGRAM_CHAT_ID=<optional>
 ```
 
-Without them it responds `503 NOT_CONFIGURED` and the form shows call/Telegram fallbacks —
-it never pretends a lead was sent. Swap the Telegram call for a CRM/Sheets integration in the same file if needed.
+Each row gets a Tashkent timestamp and a submission id (retries never duplicate). With nothing configured the
+endpoint responds `503 NOT_CONFIGURED` and the form shows call/Telegram fallbacks — it never pretends a lead
+was sent. Secrets are server-only.
 
 ## Structure
 

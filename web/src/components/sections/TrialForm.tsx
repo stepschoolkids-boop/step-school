@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { useId, useState, type FormEvent } from "react";
+import { useId, useRef, useState, type FormEvent } from "react";
 import { Riko } from "@/components/brand/Riko";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
@@ -44,6 +44,9 @@ export function TrialForm() {
   const [errors, setErrors] = useState<Errors>({});
   const [phone, setPhone] = useState("+998 ");
   const [time, setTime] = useState("");
+  /** One id per form fill: retries of the same submission never create a second row. */
+  const submissionId = useRef<string | null>(null);
+  const inFlight = useRef(false);
 
   const validate = (fd: FormData): Errors => {
     const e: Errors = {};
@@ -64,6 +67,9 @@ export function TrialForm() {
       form.querySelector<HTMLElement>("[aria-invalid='true']")?.focus();
       return;
     }
+    if (inFlight.current) return; // ignore accidental double clicks / double submits
+    inFlight.current = true;
+    submissionId.current ??= crypto.randomUUID();
     setStatus("loading");
     setServerError(null);
     setNotConfigured(false);
@@ -71,11 +77,18 @@ export function TrialForm() {
       const res = await fetch("/api/trial", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ childName: fd.get("childName"), childAge: fd.get("childAge"), parentPhone: phone.replace(/\s/g, ""), preferredTime: time }),
+        body: JSON.stringify({
+          id: submissionId.current,
+          childName: fd.get("childName"),
+          childAge: fd.get("childAge"),
+          parentPhone: phone.replace(/\s/g, ""),
+          preferredTime: time,
+        }),
       });
       const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string; code?: string };
       if (res.ok && data.ok) {
         setStatus("success");
+        submissionId.current = null; // next fill is a new submission
         form.reset();
         setPhone("+998 ");
         setTime("");
@@ -87,6 +100,8 @@ export function TrialForm() {
     } catch {
       setServerError("Internet bilan bog‘lanishda xatolik. Qayta urinib ko‘ring.");
       setStatus("error");
+    } finally {
+      inFlight.current = false;
     }
   };
 
@@ -107,7 +122,7 @@ export function TrialForm() {
               <span className="absolute inset-0 -z-10 scale-125 rounded-full bg-green/20 blur-xl" aria-hidden="true" />
               <Riko variant="win" idle sizes="160px" className="w-40" />
             </div>
-            <h3 className="headline mt-6 text-3xl text-white">Qabul qilindi!</h3>
+            <h3 className="headline mt-6 text-3xl text-white">Arizangiz qabul qilindi!</h3>
             <p className="mt-3 max-w-sm text-white/70">{RESPONSE_PROMISE ?? "Tez orada siz bilan bog‘lanamiz."}</p>
             <p className="mt-1 text-sm text-white/45">Riko sizni sinov darsida kutadi.</p>
             <button type="button" onClick={() => setStatus("idle")} className="mt-8 text-sm font-bold text-green underline-offset-4 hover:underline">

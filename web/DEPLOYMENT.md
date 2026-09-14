@@ -78,14 +78,24 @@ Always copy the values from the provider dashboard rather than from this file.
 
 ## 3. Trial-lesson leads (env vars)
 
-`src/app/api/trial/route.ts` forwards each lead as a Telegram message when both variables exist:
+`src/app/api/trial/route.ts` validates each submission server-side, then:
 
-| Variable | Value |
-|---|---|
-| `TRIAL_TELEGRAM_BOT_TOKEN` | Token of a bot that is a member of the receiving chat. The school's existing bot token (`TELEGRAM_BOT_TOKEN` of the Step Multilevel bot) can be reused. |
-| `TRIAL_TELEGRAM_CHAT_ID` | Chat that receives leads — e.g. the admin's ID (`ADMIN_CHAT_ID`) or a private "Leads" group the bot was added to. |
+1. **Google Sheet (source of truth)** — appends a row through an Apps Script Web App.
+   Setup in `scripts/apps-script/README.md` (two minutes, no Google Cloud project).
 
-Without them the endpoint answers `503 NOT_CONFIGURED` and the form offers the phone number and Telegram link instead. Nothing is ever pretended to be sent.
+   | Variable | Value |
+   |---|---|
+   | `SHEETS_WEBAPP_URL` | the `/exec` URL of the deployed Apps Script web app |
+   | `SHEETS_WEBAPP_SECRET` | shared secret, identical to the script's `SECRET` property |
+
+   Columns: Sana/vaqt (Asia/Tashkent, set by the script) · Farzandning ismi · Yoshi · Ota-onaning telefon raqami · Qulay vaqt · Manba · ID.
+   The ID makes retries idempotent: the same submission is never written twice.
+
+2. **Telegram (optional, best-effort)** — `TRIAL_TELEGRAM_BOT_TOKEN` + `TRIAL_TELEGRAM_CHAT_ID`.
+   The school's existing bot token and admin chat id can be reused.
+
+With nothing configured the endpoint answers `503 NOT_CONFIGURED` and the form offers the phone number
+and Telegram link instead. Nothing is ever pretended to be sent. All secrets stay on the server.
 
 ## 4. Post-deploy checks
 
