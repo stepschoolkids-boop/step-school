@@ -44,8 +44,10 @@ export type ContactInfo = {
   telegramUsername: string | null;
   /** Second official Telegram (school channel/account) — CONFIRMED by the school. Shown alongside the primary. */
   telegramSecondary: string | null;
-  /** Official Instagram — CONFIRMED by the school. */
+  /** Official Instagram profile URL — CONFIRMED by the school. */
   instagramUrl: string | null;
+  /** Instagram handle shown next to the Instagram icon (without @). */
+  instagramUsername: string | null;
   /** TODO: verified street address. Keep `null` until confirmed — never guess. */
   address: string | null;
   /** TODO: Google/Yandex maps embed URL for the verified address. */
@@ -60,9 +62,10 @@ export type ContactInfo = {
 
 export const CONTACT: ContactInfo = {
   phone: "+998 99 141 49 48",
-  telegramUsername: "bdrshdvn",
+  telegramUsername: "Stepschooladmin_Muslima",
   telegramSecondary: "stepschool_kids",
   instagramUrl: "https://www.instagram.com/stepschool.kids",
+  instagramUsername: "stepschool.kids",
   address: null,
   mapEmbedUrl: null,
   workingHours: null,
