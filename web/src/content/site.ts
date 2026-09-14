@@ -59,7 +59,7 @@ export type ContactInfo = {
 };
 
 export const CONTACT: ContactInfo = {
-  phone: "+998 99 431 49 48",
+  phone: "+998 99 141 49 48",
   telegramUsername: "bdrshdvn",
   telegramSecondary: "stepschool_kids",
   instagramUrl: "https://www.instagram.com/stepschool.kids",
