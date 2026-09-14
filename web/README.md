@@ -54,7 +54,7 @@ All business content is data, separate from UI, under `src/content/`:
 
 | File | What |
 |---|---|
-| `site.ts` | Name, domain, verified facts (150 students, 13 groups, 90-min lessons…), **contact data**, response promise |
+| `site.ts` | Name, domain, verified facts (ages, 90-min lessons, 4 books / 156 lessons), **contact data**, response promise |
 | `books.ts` | The 4 books (Start/Speak/Read/Win, Riko!) and the 12 verified book differentiators |
 | `lesson.ts` | Stages of the 90-minute lesson (no per-stage timings — not verified) |
 | `schedule.ts` | Group schedule + pricing structures (**empty until real data exists**) |
