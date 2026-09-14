@@ -1,59 +1,63 @@
-export type BookTone = "green" | "sky" | "sun" | "coral";
+import type { BookKey } from "./assets";
 
 export type Book = {
+  /** Registry key — selects the official cover and the book's own Riko. */
+  key: BookKey;
   step: number;
   /** Product name — stays in English by brand decision. */
   title: string;
   /** Uzbek concept line shown to parents. */
   concept: string;
-  /** English concept as used in the school's material. */
+  /** English concept as printed on the cover. */
   conceptEn: string;
   /** One-sentence promise in Uzbek. */
   promise: string;
-  tone: BookTone;
-  /**
-   * Path under /public to the real cover (e.g. "/books/start-riko.jpg").
-   * `null` renders the generated brand cover. Drop real artwork in and set the path.
-   */
-  cover: string | null;
+  /** Brand colour sampled from the official cover — used for glows and accents only. */
+  color: string;
+  /** Tailwind text class matching `color`. */
+  textClass: string;
 };
 
 export const BOOKS: Book[] = [
   {
+    key: "start",
     step: 1,
     title: "Start, Riko!",
     concept: "Birinchi so‘zlar",
     conceptEn: "First words",
     promise: "Bola ingliz tilidagi birinchi so‘zlarini o‘rganadi va ulardan qo‘rqmay foydalanishni boshlaydi.",
-    tone: "green",
-    cover: null,
+    color: "#e8792b",
+    textClass: "text-[#f39a52]",
   },
   {
+    key: "speak",
     step: 2,
     title: "Speak, Riko!",
     concept: "Birinchi gaplar",
     conceptEn: "First sentences",
     promise: "So‘zlar gapga aylanadi: bola o‘zi haqida, oilasi va kuni haqida gapira boshlaydi.",
-    tone: "sky",
-    cover: null,
+    color: "#2b7bdb",
+    textClass: "text-[#6fb0ff]",
   },
   {
+    key: "read",
     step: 3,
     title: "Read, Riko!",
     concept: "Birinchi hikoyalar",
     conceptEn: "First stories",
     promise: "Bola o‘rgangan so‘zlaridan tuzilgan hikoyalarni o‘zi o‘qiydi va tushunadi.",
-    tone: "sun",
-    cover: null,
+    color: "#e2593d",
+    textClass: "text-[#ff8f74]",
   },
   {
+    key: "win",
     step: 4,
     title: "Win, Riko!",
     concept: "Ingliz tiliga tayyor",
     conceptEn: "Ready for English",
     promise: "Bir yillik yo‘l yakunida bola ingliz tilida ishonch bilan gapiradi, o‘qiydi va tushunadi.",
-    tone: "coral",
-    cover: null,
+    color: "#2f63d6",
+    textClass: "text-[#8fb3ff]",
   },
 ];
 
@@ -65,7 +69,7 @@ export type BookFeature = {
   badge?: string;
 };
 
-/** Verified differentiators of the STEP SCHOOL KIDS books. */
+/** Verified differentiators of the STEP SCHOOL KIDS books (full list for the phase-2 Books page). */
 export const BOOK_FEATURES: BookFeature[] = [
   { icon: "riko", title: "Riko grammatikani o‘rgatadi", text: "Qoidalar quruq jadval emas — Riko ularni bolaga o‘z tilida tushuntiradi." },
   { icon: "dialog", title: "Ikki qahramon dialogi", text: "Har bir grammatika qoidasi ikki qahramon suhbati orqali ochib beriladi." },

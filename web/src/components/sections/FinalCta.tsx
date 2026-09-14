@@ -50,6 +50,13 @@ export function FinalCta() {
                   </a>
                 </li>
               )}
+              {CONTACT.telegramSecondary && (
+                <li>
+                  <a href={telegramHref(CONTACT.telegramSecondary)} target="_blank" rel="noopener noreferrer" className="glass inline-flex h-12 items-center gap-2.5 rounded-full px-5 font-bold text-white transition-colors hover:bg-white/10">
+                    <Icon name="telegram" className="size-4 text-blue-light" /> @{CONTACT.telegramSecondary}
+                  </a>
+                </li>
+              )}
               {CONTACT.instagramUrl && (
                 <li>
                   <a href={CONTACT.instagramUrl} target="_blank" rel="noopener noreferrer" className="glass inline-flex h-12 items-center gap-2.5 rounded-full px-5 font-bold text-white transition-colors hover:bg-white/10">

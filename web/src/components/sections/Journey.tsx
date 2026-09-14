@@ -2,21 +2,14 @@
 
 import { AnimatePresence, motion, useMotionValueEvent, useScroll, useTransform } from "motion/react";
 import { useRef, useState } from "react";
-import { BookCover } from "@/components/brand/BookCover";
+import { Book as BookCard } from "@/components/brand/Book";
 import { Footprint } from "@/components/brand/Footprint";
 import { Riko } from "@/components/brand/Riko";
-import { BOOKS, type BookTone } from "@/content/books";
+import { BOOKS } from "@/content/books";
 import { EASE_OUT_EXPO, usePrefersReducedMotion } from "@/lib/motion";
 
 const WORDS = ["START", "SPEAK", "READ", "WIN"];
 const BG = ["#081027", "#0a1a3f", "#082a2c", "#0d1a3a"];
-const GLOW: Record<BookTone, string> = {
-  green: "rgba(47,214,127,0.35)",
-  sky: "rgba(61,139,255,0.4)",
-  sun: "rgba(255,194,51,0.28)",
-  coral: "rgba(255,120,90,0.3)",
-};
-const TONE_TEXT: Record<BookTone, string> = { green: "text-green", sky: "text-blue-light", sun: "text-sun", coral: "text-[#ff9a7a]" };
 
 /** Footprints along the stage path (percent of stage width / height). */
 const PRINTS = [4, 13, 22, 31, 40, 49, 58, 67, 76, 85].map((x, i) => ({ x, y: 78 - (i % 2) * 10, r: i % 2 ? 10 : -8 }));
@@ -47,13 +40,13 @@ export function Journey() {
         {/* tone glow */}
         <AnimatePresence>
           <motion.div
-            key={book.tone}
+            key={book.key}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8 }}
             className="pointer-events-none absolute -right-[10%] top-[10%] h-[70vmin] w-[70vmin] rounded-full blur-3xl"
-            style={{ background: `radial-gradient(circle, ${GLOW[book.tone]}, transparent 62%)` }}
+            style={{ background: `radial-gradient(circle, ${book.color}66, transparent 62%)` }}
             aria-hidden="true"
           />
         </AnimatePresence>
@@ -83,7 +76,7 @@ export function Journey() {
                 <AnimatePresence mode="popLayout" initial={false}>
                   <motion.p
                     key={active}
-                    className={`headline-xl absolute bottom-0 left-0 whitespace-nowrap text-[clamp(3.2rem,15vw,14rem)] ${TONE_TEXT[book.tone]}`}
+                    className={`headline-xl absolute bottom-0 left-0 whitespace-nowrap text-[clamp(3.2rem,15vw,14rem)] ${book.textClass}`}
                     initial={{ y: reduced ? 0 : "70%", opacity: 0 }}
                     animate={{ y: "0%", opacity: 1 }}
                     exit={{ y: reduced ? 0 : "-70%", opacity: 0 }}
@@ -129,7 +122,7 @@ export function Journey() {
                   transition={{ duration: 0.5, ease: EASE_OUT_EXPO }}
                   className="book-3d absolute inset-0"
                 >
-                  <BookCover book={book} />
+                  <BookCard book={book} sizes="(max-width: 640px) 25vw, 200px" />
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -154,9 +147,20 @@ export function Journey() {
             <TrailPrint key={i} p={p} at={i / PRINTS.length} progress={scrollYProgress} reduced={reduced} />
           ))}
           <motion.div style={{ left: reduced ? "50%" : rikoLeft }} className="absolute bottom-[6%] w-[clamp(96px,20vw,210px)] -translate-x-1/2 lg:translate-x-0">
-            <div className="absolute inset-x-[10%] bottom-0 h-[16%] rounded-full bg-[radial-gradient(ellipse,rgba(47,214,127,0.35),transparent_70%)] blur-md" />
-            <div className={reduced ? "" : "anim-bob"}>
-              <Riko animated={!reduced} className="relative w-full drop-shadow-[0_30px_40px_rgba(0,0,0,0.5)]" />
+            <div className="absolute inset-x-[10%] bottom-0 h-[16%] rounded-full blur-md" style={{ background: `radial-gradient(ellipse, ${book.color}66, transparent 70%)` }} />
+            <div className={`relative ${reduced ? "" : "anim-bob"}`} style={{ aspectRatio: "1130 / 1280" }}>
+              <AnimatePresence initial={false}>
+                <motion.div
+                  key={book.key}
+                  initial={{ opacity: 0, scale: 0.92 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ duration: 0.45, ease: EASE_OUT_EXPO }}
+                  className="absolute inset-0"
+                >
+                  <Riko variant={book.key} decorative sizes="(max-width: 640px) 30vw, 220px" className="w-full drop-shadow-[0_30px_40px_rgba(0,0,0,0.5)]" />
+                </motion.div>
+              </AnimatePresence>
             </div>
           </motion.div>
           <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-navy-950/80" />

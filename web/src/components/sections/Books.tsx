@@ -2,7 +2,7 @@
 
 import { motion, useMotionValue, useScroll, useSpring, useTransform } from "motion/react";
 import { useEffect, useRef, useState, type PointerEvent } from "react";
-import { BookCover } from "@/components/brand/BookCover";
+import { Book as BookCard } from "@/components/brand/Book";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -41,7 +41,7 @@ function TiltBook({ book, index }: { book: Book; index: number }) {
   };
 
   return (
-    <article className="w-[70vw] max-w-[300px] shrink-0 sm:w-[44vw] lg:w-[clamp(210px,16.5vw,262px)]">
+    <article className="w-[62vw] max-w-[260px] shrink-0 sm:w-[38vw] lg:w-[clamp(200px,14.5vw,236px)]">
       <div className="book-scene" onPointerMove={onMove} onPointerLeave={reset}>
         <motion.div
           style={{ rotateX: srx, rotateY: sry }}
@@ -51,17 +51,18 @@ function TiltBook({ book, index }: { book: Book; index: number }) {
           aria-label={`${book.title} — ${book.concept}`}
         >
           <motion.div
-            style={{ left: glowX }}
-            className="pointer-events-none absolute -inset-[8%] -z-10 -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(143,192,255,0.28),transparent_60%)] blur-2xl"
+            style={{ left: glowX, background: `radial-gradient(circle, ${book.color}55, transparent 60%)` }}
+            className="pointer-events-none absolute -inset-[8%] -z-10 -translate-x-1/2 rounded-full blur-2xl"
             aria-hidden="true"
           />
-          <BookCover book={book} priority={index === 0} />
+          <BookCard book={book} priority={index === 0} withRiko />
         </motion.div>
       </div>
       <div className="mt-6">
         <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.22em] text-white/45">Step 0{book.step}</p>
         <h3 className="mt-1 font-display text-[1.15rem] font-semibold text-white">{book.title}</h3>
         <p className="text-white/60">{book.concept}</p>
+        <p className="mt-2 text-sm leading-relaxed text-white/45">{book.promise}</p>
       </div>
     </article>
   );
@@ -111,7 +112,7 @@ export function Books() {
 
         {/* Desktop: scroll-driven shelf */}
         <div className="relative mt-8 hidden lg:block">
-          <motion.ul ref={trackRef} style={{ x: reduced ? 0 : x }} className="flex gap-12 pl-[max(1.25rem,calc((100vw-80rem)/2+3rem))] pr-[8vw]">
+          <motion.ul ref={trackRef} style={{ x: reduced ? 0 : x }} className="flex gap-[7.5vw] pl-[max(1.25rem,calc((100vw-80rem)/2+3rem))] pr-[8vw]">
             {BOOKS.map((b, i) => (
               <li key={b.step}>
                 <TiltBook book={b} index={i} />
@@ -125,7 +126,7 @@ export function Books() {
 
         {/* Phones / tablets: native snap scroller */}
         <div className="mt-10 lg:hidden">
-          <ul className="snap-x-scroller px-[clamp(1.25rem,4vw,3rem)]" aria-label="Kitoblar">
+          <ul className="snap-x-scroller gap-[30vw] px-[clamp(1.25rem,4vw,3rem)] pr-[34vw]" aria-label="Kitoblar">
             {BOOKS.map((b, i) => (
               <li key={b.step}>
                 <Reveal delay={i * 0.05}>

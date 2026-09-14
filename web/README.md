@@ -10,12 +10,13 @@ Production domain (to be connected): **https://stepschoolkids.uz**
 - Next.js 15 (App Router) · React 19 · TypeScript
 - Tailwind CSS v4 (design tokens in `src/app/globals.css`)
 - `motion` (Framer Motion) for the hero entrance choreography, sticky scroll scenes and reveals
-- No UI kit, no icon library — Riko, the footprint mark, book covers and icons are hand-drawn SVG components
+- No UI kit, no icon library — line icons are inline SVG; the logo, Riko and book covers are the **official image assets**
 
 ## Visual system (v2)
 
 Navy foundation (`#050a17` → `#0d1a3a`), blue and green light, white type. Display face **Unbounded**,
-body **Manrope**. Footprints are the recurring motif; Riko is the guide. One continuous story:
+body **Manrope**. The paw mark from the official logo is the recurring motif (trail, bullets, pattern);
+the official Riko is the guide, with a dedicated pose per book; book accent colours are sampled from the covers. One continuous story:
 hero entrance (footprint → path → Riko → kinetic "STEP" → tagline → CTA) → sticky START/SPEAK/READ/WIN
 scene → books shelf → 1 yil / 156 dars → 90-minute lesson → trust & terms → "Birinchi qadam shu yerdan
 boshlanadi" form. All motion is transform/opacity only and collapses under `prefers-reduced-motion`.
@@ -29,6 +30,23 @@ npm run build      # production build (also type-checks + lints)
 npm run start
 npm run lint
 ```
+
+## Official brand assets
+
+Every logo, Riko pose and book cover is an official file under `public/assets/` and is registered once in
+`src/content/assets.ts` (path, intrinsic size, alt text). Components (`brand/Logo`, `brand/Riko`, `brand/Book`)
+read from that registry — no image path is hard-coded anywhere else.
+
+| Key | File | Used in |
+|---|---|---|
+| `brand.logo` | `assets/brand/logo.png` | navbar, footer |
+| `brand.logoMark` | `assets/brand/logo-mark.png` | compact navbar, web manifest, favicon (`src/app/icon.png`) |
+| `riko.hero` | `assets/riko/riko-hero.png` | hero |
+| `riko.start` / `speak` / `read` / `win` | `assets/riko/riko-*.png` | each book card, journey stage, lesson panel, form success, 404 |
+| `books.start` / `speak` / `read` / `win` | `assets/books/book-*.png` | books shelf, journey cover |
+
+`npm run assets:check` lists any file the registry expects but `public/` does not contain.
+See `public/assets/README.md` for the drop-in checklist.
 
 ## Where the content lives
 
@@ -51,11 +69,11 @@ Fields that are not verified are `null`/empty and the UI renders an honest fallb
 - **Prices & groups** → `schedule.ts` (`GROUPS`, `PRICE`)
 - **Teachers** → `teachers.ts` (`TEACHERS`, photos in `public/teachers/`)
 - **Address / map / hours / Instagram / entrance photo** → `site.ts` (`CONTACT`)
-- **Real book covers** → drop files in `public/books/` and set `cover` in `books.ts`
+- **Book covers / Riko / logo** → replace the files under `public/assets/` (see above)
 - **"We'll contact you within 1 hour"** → `site.ts` (`RESPONSE_PROMISE`) once approved
 
-The phone number and Telegram handle are the official STEP SCHOOL KIDS contacts, confirmed by the
-school (they are shared with the school's Telegram bot config in `app/config.py`).
+Phone (+998 99 431 49 48), both Telegram handles (@bdrshdvn, @stepschool_kids) and Instagram
+(stepschool.kids) are the official STEP SCHOOL KIDS contacts, confirmed by the school on 14 Sept 2026.
 
 ## Trial-lesson form
 

@@ -1,16 +1,25 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Footprint } from "./Footprint";
+import { ASSETS } from "@/content/assets";
 
-export function Logo({ compact = false }: { compact?: boolean }) {
+/**
+ * Official STEP SCHOOL KIDS logo — the exact provided asset, never redrawn.
+ * `compact` switches to the paw mark for tight spaces.
+ */
+export function Logo({ compact = false, className = "" }: { compact?: boolean; className?: string }) {
+  const asset = compact ? ASSETS.brand.logoMark : ASSETS.brand.logo;
   return (
-    <Link href="/" className="group inline-flex items-center gap-2.5" aria-label="STEP SCHOOL KIDS — bosh sahifa">
-      <span className="relative grid size-10 place-items-center rounded-[14px] bg-green text-navy-950 shadow-[0_8px_24px_-8px_var(--green-glow)] transition-transform duration-300 group-hover:-rotate-6">
-        <Footprint className="size-6 fill-current" />
-      </span>
-      <span className="flex flex-col leading-none">
-        <span className="font-display text-[1.05rem] font-bold tracking-tight text-white">STEP</span>
-        {!compact && <span className="mt-0.5 text-[0.58rem] font-extrabold uppercase tracking-[0.24em] text-white/55">School Kids</span>}
-      </span>
+    <Link href="/" className={`inline-flex items-center ${className}`} aria-label="STEP SCHOOL KIDS — bosh sahifa">
+      <Image
+        src={asset.src}
+        alt={asset.alt}
+        width={asset.width}
+        height={asset.height}
+        priority
+        sizes="(max-width: 640px) 140px, 180px"
+        className={compact ? "h-10 w-auto" : "h-10 w-auto sm:h-11"}
+        draggable={false}
+      />
     </Link>
   );
 }

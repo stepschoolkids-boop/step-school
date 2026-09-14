@@ -40,6 +40,20 @@ export function Footer() {
               </a>
             </li>
           )}
+          {CONTACT.telegramSecondary && (
+            <li>
+              <a href={telegramHref(CONTACT.telegramSecondary)} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                @{CONTACT.telegramSecondary}
+              </a>
+            </li>
+          )}
+          {CONTACT.instagramUrl && (
+            <li>
+              <a href={CONTACT.instagramUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                Instagram · stepschool.kids
+              </a>
+            </li>
+          )}
         </ul>
       </div>
       <div className="container-x flex flex-col gap-1 border-t border-white/10 py-5 text-xs text-white/35 sm:flex-row sm:justify-between">

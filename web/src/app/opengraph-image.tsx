@@ -25,9 +25,8 @@ export default function OpenGraphImage() {
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", padding: 72, width: "100%" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
             <div style={{ width: 64, height: 64, borderRadius: 20, background: "#2fd67f", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <svg viewBox="0 0 100 120" width="38" height="46" fill="#050a17">
-                <ellipse cx="50" cy="88" rx="27" ry="23" /><ellipse cx="50" cy="40" rx="11.5" ry="27" />
-                <ellipse cx="23" cy="54" rx="11" ry="25" transform="rotate(-30 23 54)" /><ellipse cx="77" cy="54" rx="11" ry="25" transform="rotate(30 77 54)" />
+              <svg viewBox="0 0 100 100" width="40" height="40" fill="#050a17">
+                <ellipse cx="50" cy="66" rx="27" ry="21" /><circle cx="19" cy="41" r="10" /><circle cx="39" cy="26" r="11" /><circle cx="61" cy="26" r="11" /><circle cx="81" cy="41" r="10" />
               </svg>
             </div>
             <div style={{ fontSize: 30, fontWeight: 800, letterSpacing: 2 }}>STEP SCHOOL KIDS</div>

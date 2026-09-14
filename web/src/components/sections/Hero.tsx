@@ -167,22 +167,26 @@ export function Hero() {
 
               {/* Stage light under Riko */}
               <motion.div
-                className="absolute left-[46%] top-[58%] h-[10%] w-[52%] rounded-full bg-[radial-gradient(ellipse,rgba(143,192,255,0.35),transparent_70%)] blur-md"
+                className="absolute left-[44%] top-[60%] h-[10%] w-[52%] rounded-full bg-[radial-gradient(ellipse,rgba(143,192,255,0.35),transparent_70%)] blur-md"
                 initial={{ opacity: 0, scaleX: 0.4 }}
                 animate={{ opacity: 1, scaleX: 1 }}
                 transition={{ delay: t(1.6), duration: d(1), ease: EASE_OUT_EXPO }}
               />
               {/* Riko rises at the end of the path */}
               <motion.div
-                className="absolute left-[38%] top-[2%] w-[60%]"
-                initial={{ opacity: 0, y: 70, scale: 0.86, clipPath: "inset(100% 0 0 0)" }}
-                animate={{ opacity: 1, y: 0, scale: 1, clipPath: "inset(-10% 0 0 0)" }}
-                transition={{ delay: t(1.55), duration: d(1), ease: EASE_OUT_EXPO }}
+                className="absolute left-[40%] top-[0%] w-[56%]"
+                initial={{ opacity: 0, y: 70, scale: 0.9, clipPath: "inset(100% 0 0 0)" }}
+                animate={{ opacity: 1, y: 0, scale: 1, clipPath: "inset(-10% -10% -10% -10%)" }}
+                transition={{ delay: t(1.55), duration: d(1.05), ease: EASE_OUT_EXPO }}
               >
-                <div className="absolute inset-[8%] rounded-full bg-[radial-gradient(circle,rgba(47,214,127,0.38),transparent_64%)] blur-2xl" />
-                <div className={reduced ? "" : "anim-bob"}>
-                  <Riko animated={!reduced} className="relative w-full drop-shadow-[0_34px_44px_rgba(0,0,0,0.55)]" />
-                </div>
+                <div className="absolute inset-[6%] rounded-full bg-[radial-gradient(circle,rgba(47,214,127,0.34),transparent_64%)] blur-2xl" />
+                <Riko
+                  variant="hero"
+                  priority
+                  idle={!reduced}
+                  sizes="(max-width: 640px) 56vw, (max-width: 1024px) 40vw, 36vw"
+                  className="relative w-full drop-shadow-[0_34px_44px_rgba(0,0,0,0.6)]"
+                />
               </motion.div>
 
               {/* Floating educational elements */}

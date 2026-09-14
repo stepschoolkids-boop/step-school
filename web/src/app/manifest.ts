@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { ASSETS } from "@/content/assets";
 import { SITE } from "@/content/site";
 
 export default function manifest(): MetadataRoute.Manifest {
@@ -11,6 +12,6 @@ export default function manifest(): MetadataRoute.Manifest {
     lang: "uz",
     background_color: "#050a17",
     theme_color: "#050a17",
-    icons: [{ src: "/icon.svg", sizes: "any", type: "image/svg+xml" }],
+    icons: [{ src: ASSETS.brand.logoMark.src, sizes: "512x512", type: "image/png" }],
   };
 }
