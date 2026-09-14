@@ -51,3 +51,4 @@ next-env.d.ts
 .preview.mjs
 .sect.mjs
 .bound.mjs
+.trust.mjs

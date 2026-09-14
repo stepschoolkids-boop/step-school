@@ -123,8 +123,13 @@ export function Navbar() {
                     </a>
                   )}
                   {CONTACT.telegramUsername && (
-                    <a href={telegramHref(CONTACT.telegramUsername)} target="_blank" rel="noopener noreferrer" aria-label="Telegram" className="grid size-12 place-items-center rounded-full border border-white/15">
+                    <a href={telegramHref(CONTACT.telegramUsername)} target="_blank" rel="noopener noreferrer" aria-label={`Telegram @${CONTACT.telegramUsername}`} className="grid size-12 place-items-center rounded-full border border-white/15">
                       <Icon name="telegram" className="size-5 text-blue-light" />
+                    </a>
+                  )}
+                  {CONTACT.instagramUrl && (
+                    <a href={CONTACT.instagramUrl} target="_blank" rel="noopener noreferrer" aria-label={`Instagram @${CONTACT.instagramUsername ?? "stepschool.kids"}`} className="grid size-12 place-items-center rounded-full border border-white/15">
+                      <Icon name="instagram" className="size-5 text-[#ff8f74]" />
                     </a>
                   )}
                 </div>

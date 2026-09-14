@@ -36,4 +36,11 @@ export type PriceInfo = {
 
 export const GROUPS: GroupSlot[] = [];
 
-export const PRICE: PriceInfo | null = null;
+/** Monthly tuition — CONFIRMED by the school (14 Sept 2026). */
+export const PRICE: PriceInfo | null = {
+  monthly: "450 000 so‘m",
+  monthlyNote: "/ oy",
+  included: [],
+  bookCost: null,
+  payment: null,
+};

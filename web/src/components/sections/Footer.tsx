@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Footprint } from "@/components/brand/Footprint";
 import { Logo } from "@/components/brand/Logo";
+import { Icon } from "@/components/ui/Icon";
 import { NAV_ITEMS } from "@/content/nav";
 import { CONTACT, SITE, telHref, telegramHref } from "@/content/site";
 
@@ -49,8 +50,8 @@ export function Footer() {
           )}
           {CONTACT.instagramUrl && (
             <li>
-              <a href={CONTACT.instagramUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white">
-                Instagram · stepschool.kids
+              <a href={CONTACT.instagramUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 hover:text-white">
+                <Icon name="instagram" className="size-4 text-[#ff8f74]" /> @{CONTACT.instagramUsername ?? "stepschool.kids"}
               </a>
             </li>
           )}

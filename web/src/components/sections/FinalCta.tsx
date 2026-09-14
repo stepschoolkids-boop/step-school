@@ -60,7 +60,7 @@ export function FinalCta() {
               {CONTACT.instagramUrl && (
                 <li>
                   <a href={CONTACT.instagramUrl} target="_blank" rel="noopener noreferrer" className="glass inline-flex h-12 items-center gap-2.5 rounded-full px-5 font-bold text-white transition-colors hover:bg-white/10">
-                    <Icon name="instagram" className="size-4" /> Instagram
+                    <Icon name="instagram" className="size-4 text-[#ff8f74]" /> @{CONTACT.instagramUsername ?? "stepschool.kids"}
                   </a>
                 </li>
               )}
