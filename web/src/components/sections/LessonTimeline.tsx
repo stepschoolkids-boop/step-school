@@ -131,7 +131,7 @@ export function LessonTimeline() {
                 )}
               </motion.div>
             </AnimatePresence>
-            <Riko className="pointer-events-none absolute -bottom-6 -right-4 w-32 rotate-[-6deg] opacity-90 sm:w-40" />
+            <Riko variant="speak" decorative sizes="160px" className="pointer-events-none absolute -bottom-4 -right-2 w-28 sm:w-36" />
             {/* progress segments */}
             <div className="absolute inset-x-7 top-4 flex gap-1 sm:inset-x-9" aria-hidden="true">
               {LESSON_STAGES.map((s, i) => (

@@ -38,14 +38,13 @@ export const FACTS = {
 } as const;
 
 export type ContactInfo = {
-  /**
-   * Official STEP SCHOOL KIDS contact — CONFIRMED by the school (Sept 2026).
-   * Source: the school's Telegram bot configuration in this repository (app/config.py).
-   */
+  /** Official STEP SCHOOL KIDS phone — CONFIRMED by the school (14 Sept 2026). */
   phone: string | null;
-  /** Official STEP SCHOOL KIDS admin Telegram — CONFIRMED by the school (Sept 2026). */
+  /** Primary admin Telegram — CONFIRMED by the school. */
   telegramUsername: string | null;
-  /** TODO: add the Kids Instagram profile URL when available. */
+  /** Second official Telegram (school channel/account) — CONFIRMED by the school. Shown alongside the primary. */
+  telegramSecondary: string | null;
+  /** Official Instagram — CONFIRMED by the school. */
   instagramUrl: string | null;
   /** TODO: verified street address. Keep `null` until confirmed — never guess. */
   address: string | null;
@@ -60,9 +59,10 @@ export type ContactInfo = {
 };
 
 export const CONTACT: ContactInfo = {
-  phone: "+998 99 141 49 48",
+  phone: "+998 99 431 49 48",
   telegramUsername: "bdrshdvn",
-  instagramUrl: null,
+  telegramSecondary: "stepschool_kids",
+  instagramUrl: "https://www.instagram.com/stepschool.kids",
   address: null,
   mapEmbedUrl: null,
   workingHours: null,

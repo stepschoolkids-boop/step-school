@@ -105,7 +105,7 @@ export function TrialForm() {
           >
             <div className="relative">
               <span className="absolute inset-0 -z-10 scale-125 rounded-full bg-green/20 blur-xl" aria-hidden="true" />
-              <Riko animated className="w-40" />
+              <Riko variant="win" idle sizes="160px" className="w-40" />
             </div>
             <h3 className="headline mt-6 text-3xl text-white">Qabul qilindi!</h3>
             <p className="mt-3 max-w-sm text-white/70">{RESPONSE_PROMISE ?? "Tez orada siz bilan bog‘lanamiz."}</p>

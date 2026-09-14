@@ -60,6 +60,7 @@ export const viewport: Viewport = {
 function jsonLd() {
   const sameAs = [
     CONTACT.telegramUsername ? telegramHref(CONTACT.telegramUsername) : null,
+    CONTACT.telegramSecondary ? telegramHref(CONTACT.telegramSecondary) : null,
     CONTACT.instagramUrl,
   ].filter(Boolean);
 

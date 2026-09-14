@@ -45,3 +45,8 @@ next-env.d.ts
 .qa.mjs
 .menu.mjs
 .seq.mjs
+.layout.mjs
+.measure.mjs
+.process.mjs
+.preview.mjs
+.sect.mjs

@@ -9,7 +9,6 @@ import { BOOKS } from "@/content/books";
 import { FACTS } from "@/content/site";
 import { usePrefersReducedMotion } from "@/lib/motion";
 
-const DOT = ["bg-green", "bg-blue-light", "bg-sun", "bg-[#ff9a7a]"];
 
 /** 1 YIL · 156 DARS — giant kinetic numbers, then the four stages as a progress line. */
 export function Stats() {
@@ -55,13 +54,13 @@ export function Stats() {
         {/* stages line */}
         <div ref={ref} className="mt-16 sm:mt-20">
           <div className="relative mx-3 h-1 rounded-full bg-white/10">
-            <motion.div className="absolute inset-y-0 left-0 rounded-full bg-[linear-gradient(90deg,#2fd67f,#8fc0ff,#ffc233,#ff9a7a)]" style={{ width: reduced ? "100%" : fill }} />
+            <motion.div className="absolute inset-y-0 left-0 rounded-full" style={{ width: reduced ? "100%" : fill, background: `linear-gradient(90deg, ${BOOKS.map((b) => b.color).join(", ")})` }} />
           </div>
           <ol className="mt-[-0.9rem] grid grid-cols-2 gap-y-8 sm:grid-cols-4">
             {BOOKS.map((b, i) => (
               <li key={b.step} className="px-3">
                 <Reveal delay={i * 0.08}>
-                  <span className={`grid size-7 place-items-center rounded-full border-[3px] border-navy-950 ${DOT[i]} text-navy-950`}>
+                  <span className="grid size-7 place-items-center rounded-full border-[3px] border-navy-950 text-white" style={{ background: b.color }}>
                     <Footprint className="size-3.5 fill-current" />
                   </span>
                   <p className="mt-4 text-[0.66rem] font-extrabold uppercase tracking-[0.22em] text-white/40">Step 0{b.step}</p>
