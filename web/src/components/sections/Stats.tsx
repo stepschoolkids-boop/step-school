@@ -18,7 +18,7 @@ export function Stats() {
   const fill = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section className="relative overflow-hidden bg-navy-950 py-24 sm:py-32" aria-labelledby="stats-title">
+    <section className="relative overflow-hidden bg-navy-950 py-20 sm:py-28 lg:py-32" aria-labelledby="stats-title">
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <div className="absolute -left-[20%] top-0 h-[70vmin] w-[70vmin] rounded-full bg-[radial-gradient(circle,rgba(47,214,127,0.14),transparent_60%)]" />
       </div>

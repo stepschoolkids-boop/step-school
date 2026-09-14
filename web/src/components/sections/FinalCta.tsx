@@ -7,7 +7,7 @@ import { TrialForm } from "./TrialForm";
 /** Final conversion scene: one big statement, the form, and the verified contacts. */
 export function FinalCta() {
   return (
-    <section id="sinov-darsi" className="relative isolate scroll-mt-16 overflow-hidden bg-navy-950 py-24 sm:py-32" aria-labelledby="cta-title">
+    <section id="sinov-darsi" className="relative isolate scroll-mt-16 overflow-hidden bg-navy-950 py-20 sm:py-28 lg:py-32" aria-labelledby="cta-title">
       <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
         <div className="anim-breathe absolute left-1/2 top-0 h-[90vmin] w-[90vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(47,214,127,0.22),transparent_60%)]" />
         <div className="absolute -right-[20%] bottom-0 h-[70vmin] w-[70vmin] rounded-full bg-[radial-gradient(circle,rgba(61,139,255,0.2),transparent_60%)]" />

@@ -72,7 +72,7 @@ Fields that are not verified are `null`/empty and the UI renders an honest fallb
 - **Book covers / Riko / logo** → replace the files under `public/assets/` (see above)
 - **"We'll contact you within 1 hour"** → `site.ts` (`RESPONSE_PROMISE`) once approved
 
-Phone (+998 99 431 49 48), both Telegram handles (@bdrshdvn, @stepschool_kids) and Instagram
+Phone (+998 99 141 49 48), both Telegram handles (@bdrshdvn, @stepschool_kids) and Instagram
 (stepschool.kids) are the official STEP SCHOOL KIDS contacts, confirmed by the school on 14 Sept 2026.
 
 ## Trial-lesson form

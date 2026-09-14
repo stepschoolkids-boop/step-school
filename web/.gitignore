@@ -50,3 +50,4 @@ next-env.d.ts
 .process.mjs
 .preview.mjs
 .sect.mjs
+.bound.mjs

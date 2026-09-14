@@ -39,7 +39,7 @@ export function LessonTimeline() {
   };
 
   return (
-    <section id="darslar" className="relative overflow-hidden bg-navy-900 py-24 sm:py-32" aria-labelledby="lesson-title">
+    <section id="darslar" className="relative overflow-hidden bg-navy-950 py-20 sm:py-28 lg:py-32" aria-labelledby="lesson-title">
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <div className="absolute right-[-20%] top-[-10%] h-[80vmin] w-[80vmin] rounded-full bg-[radial-gradient(circle,rgba(47,214,127,0.16),transparent_60%)]" />
         <div className="bg-footprints absolute inset-0" />
@@ -68,9 +68,9 @@ export function LessonTimeline() {
           </Reveal>
         </div>
 
-        <div ref={ref} className="mt-14 grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10">
+        <div ref={ref} className="mt-12 grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-start lg:gap-10">
           {/* tabs */}
-          <div role="tablist" aria-label="Dars bosqichlari" className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+          <div role="tablist" aria-label="Dars bosqichlari" className="grid grid-cols-2 content-start gap-2 sm:grid-cols-3">
             {LESSON_STAGES.map((s, i) => {
               const on = i === active;
               return (
@@ -110,7 +110,7 @@ export function LessonTimeline() {
           </div>
 
           {/* panel */}
-          <div id="lesson-panel" role="tabpanel" aria-labelledby={`lesson-tab-${active}`} className="glass relative min-h-[220px] overflow-hidden rounded-[var(--radius-xl)] p-7 sm:p-9">
+          <div id="lesson-panel" role="tabpanel" aria-labelledby={`lesson-tab-${active}`} className="glass relative min-h-[260px] overflow-hidden rounded-[var(--radius-2xl)] p-7 sm:p-9">
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={stage.key}

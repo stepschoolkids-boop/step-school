@@ -9,7 +9,7 @@ import { BOOKS } from "@/content/books";
 import { EASE_OUT_EXPO, usePrefersReducedMotion } from "@/lib/motion";
 
 const WORDS = ["START", "SPEAK", "READ", "WIN"];
-const BG = ["#081027", "#0a1a3f", "#082a2c", "#0d1a3a"];
+const BG = ["#050a17", "#0a1a3f", "#082a2c", "#050a17"];
 
 /** Footprints along the stage path (percent of stage width / height). */
 const PRINTS = [4, 13, 22, 31, 40, 49, 58, 67, 76, 85].map((x, i) => ({ x, y: 78 - (i % 2) * 10, r: i % 2 ? 10 : -8 }));
@@ -163,7 +163,7 @@ export function Journey() {
               </AnimatePresence>
             </div>
           </motion.div>
-          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-navy-950/80" />
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-navy-950" />
         </div>
 
         {/* progress */}

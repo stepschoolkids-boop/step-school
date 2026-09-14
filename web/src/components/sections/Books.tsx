@@ -92,7 +92,7 @@ export function Books() {
 
   return (
     <section ref={ref} id="kitoblar" className="relative bg-navy-950 lg:h-[280vh]" aria-labelledby="books-title">
-      <div className="relative flex flex-col justify-center overflow-hidden py-24 lg:sticky lg:top-0 lg:h-svh lg:py-0 lg:pt-16">
+      <div className="relative flex flex-col justify-center overflow-hidden py-20 sm:py-28 lg:sticky lg:top-0 lg:h-svh lg:py-0 lg:pt-16">
         <div className="pointer-events-none absolute inset-0" aria-hidden="true">
           <div className="absolute left-1/2 top-[40%] h-[60vmin] w-[90vmin] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse,rgba(61,139,255,0.16),transparent_60%)]" />
         </div>

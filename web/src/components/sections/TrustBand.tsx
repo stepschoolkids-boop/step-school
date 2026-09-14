@@ -27,7 +27,7 @@ const TERMS = [
  */
 export function TrustBand() {
   return (
-    <section id="narxlar" className="relative bg-navy-950 py-24 sm:py-32" aria-labelledby="trust-title">
+    <section id="narxlar" className="relative bg-navy-950 py-20 sm:py-28 lg:py-32" aria-labelledby="trust-title">
       <div className="container-x">
         <h2 id="trust-title" className="sr-only">
           Ishonch, o‘qituvchilar, jadval va narxlar
