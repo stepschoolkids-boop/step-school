@@ -40,6 +40,10 @@ services:
     envVars:
       - key: NODE_VERSION
         value: "22"
+      - key: SHEETS_WEBAPP_URL
+        sync: false
+      - key: SHEETS_WEBAPP_SECRET
+        sync: false
       - key: TRIAL_TELEGRAM_BOT_TOKEN
         sync: false
       - key: TRIAL_TELEGRAM_CHAT_ID
