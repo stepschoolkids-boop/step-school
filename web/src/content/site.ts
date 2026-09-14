@@ -25,10 +25,6 @@ export const SITE = {
 
 /** Verified numbers supplied by the school. */
 export const FACTS = {
-  students: 150,
-  activeGroups: 13,
-  /** Capacity for new groups right now (verified). */
-  openGroupCapacity: 6,
   ageFrom: 7,
   ageTo: 12,
   lessonMinutes: 90,
