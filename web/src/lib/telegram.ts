@@ -35,17 +35,15 @@ export function isTelegramConfigured(): boolean {
   return Boolean(process.env.TELEGRAM_BOT_TOKEN && process.env.TELEGRAM_CHAT_ID);
 }
 
-const escapeHtml = (s: string) => s.replace(/[<>&]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;" })[c] as string);
-
-/** The exact message the admin chat receives (Telegram HTML parse mode, user input escaped). */
+/** The exact plain-text message the admin chat receives. */
 export function formatLeadMessage(lead: TelegramLead): string {
   return [
-    "🆕 <b>YANGI SINOV DARSI ARIZASI</b>",
+    "🆕 YANGI SINOV DARSI ARIZASI",
     "",
-    `👤 Farzand: ${escapeHtml(lead.childName)}`,
-    `🎂 Yoshi: ${escapeHtml(lead.childAge)}`,
-    `📞 Telefon: ${escapeHtml(lead.parentPhone)}`,
-    `🕐 Qulay vaqt: ${escapeHtml(lead.preferredTime)}`,
+    `👤 Farzand: ${lead.childName}`,
+    `🎂 Yoshi: ${lead.childAge}`,
+    `📞 Telefon: ${lead.parentPhone}`,
+    `🕐 Qulay vaqt: ${lead.preferredTime}`,
     "",
     "🌐 Manba: stepschoolkids.uz",
   ].join("\n");
@@ -70,12 +68,7 @@ export async function sendTelegramLead(lead: TelegramLead): Promise<void> {
     res = await fetch(`${TELEGRAM_API_BASE}/bot${token}/sendMessage`, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: formatLeadMessage(lead),
-        parse_mode: "HTML",
-        link_preview_options: { is_disabled: true },
-      }),
+      body: JSON.stringify({ chat_id: chatId, text: formatLeadMessage(lead) }),
       signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
     });
   } catch (err) {
