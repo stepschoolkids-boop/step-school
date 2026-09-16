@@ -77,20 +77,18 @@ Phone (+998 99 141 49 48), both Telegram handles (@Stepschooladmin_Muslima, @ste
 
 ## Trial-lesson form
 
-`src/components/sections/TrialForm.tsx` posts to `src/app/api/trial/route.ts`, which validates and writes the
-lead to a **Google Sheet** through an Apps Script Web App (`scripts/apps-script/`), with Telegram as an optional
-second channel:
+`src/components/sections/TrialForm.tsx` posts to `src/app/api/trial/route.ts`, which validates the
+submission and sends it to the school's **Telegram admin chat** through a bot (`src/lib/telegram.ts`):
 
 ```
-SHEETS_WEBAPP_URL=<Apps Script /exec URL>
-SHEETS_WEBAPP_SECRET=<shared secret>
-TRIAL_TELEGRAM_BOT_TOKEN=<optional>
-TRIAL_TELEGRAM_CHAT_ID=<optional>
+TELEGRAM_BOT_TOKEN=<bot token>
+TELEGRAM_CHAT_ID=<admin chat id>
 ```
 
-Each row gets a Tashkent timestamp and a submission id (retries never duplicate). With nothing configured the
-endpoint responds `503 NOT_CONFIGURED` and the form shows call/Telegram fallbacks — it never pretends a lead
-was sent. Secrets are server-only.
+Each browser submission carries an id that the server remembers for a few minutes, so a retry after a
+network hiccup never reaches the admins twice. With nothing configured the endpoint responds
+`503 NOT_CONFIGURED` and the form shows call/Telegram fallbacks — it never pretends a lead was sent.
+Secrets are server-only.
 
 ## Structure
 

@@ -78,21 +78,39 @@ Always copy the values from the provider dashboard rather than from this file.
 
 ## 3. Trial-lesson leads (env vars)
 
-`src/app/api/trial/route.ts` validates each submission server-side, then:
+`src/app/api/trial/route.ts` validates each submission server-side, then sends it to the school's
+Telegram admin chat through `src/lib/telegram.ts`:
 
-1. **Google Sheet (source of truth)** — appends a row through an Apps Script Web App.
-   Setup in `scripts/apps-script/README.md` (two minutes, no Google Cloud project).
+| Variable | Value |
+|---|---|
+| `TELEGRAM_BOT_TOKEN` | token of the bot that posts the leads (from @BotFather) |
+| `TELEGRAM_CHAT_ID` | id of the admin chat that receives them (a user id, or a negative group id) |
 
-   | Variable | Value |
-   |---|---|
-   | `SHEETS_WEBAPP_URL` | the `/exec` URL of the deployed Apps Script web app |
-   | `SHEETS_WEBAPP_SECRET` | shared secret, identical to the script's `SECRET` property |
+Setup:
 
-   Columns: Sana/vaqt (Asia/Tashkent, set by the script) · Farzandning ismi · Yoshi · Ota-onaning telefon raqami · Qulay vaqt · Manba · ID.
-   The ID makes retries idempotent: the same submission is never written twice.
+1. Create a bot in [@BotFather](https://t.me/BotFather) (`/newbot`) or reuse the school's existing bot; copy its token.
+2. Open a chat with the bot and press **Start** (for a personal admin chat), or add the bot to the admin group.
+3. Find the chat id: send a message in that chat, then open
+   `https://api.telegram.org/bot<TOKEN>/getUpdates` and read `message.chat.id`. Group ids are negative.
+4. In Render → `step-school-kids-web` → **Environment**, add `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID`
+   and save. Render redeploys automatically.
 
-2. **Telegram (optional, best-effort)** — `TRIAL_TELEGRAM_BOT_TOKEN` + `TRIAL_TELEGRAM_CHAT_ID`.
-   The school's existing bot token and admin chat id can be reused.
+Each message looks like:
+
+```
+🆕 YANGI SINOV DARSI ARIZASI
+
+👤 Farzand: Aziza
+🎂 Yoshi: 9 yosh
+📞 Telefon: +998901234567
+🕐 Qulay vaqt: Kunduzi
+
+🌐 Manba: stepschoolkids.uz
+```
+
+The browser sends one submission id per filled form and re-uses it on retries; the server remembers
+recent ids, so a retry never produces a second Telegram message. If Telegram rejects the message the
+endpoint answers `502` with a retry hint and logs the reason (never the token).
 
 With nothing configured the endpoint answers `503 NOT_CONFIGURED` and the form offers the phone number
 and Telegram link instead. Nothing is ever pretended to be sent. All secrets stay on the server.
