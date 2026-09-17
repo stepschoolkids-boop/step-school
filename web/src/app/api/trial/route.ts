@@ -3,10 +3,10 @@ import { isTelegramConfigured, sendTelegramLead } from "@/lib/telegram";
 
 /**
  * Trial-lesson lead endpoint: validates the form and forwards every accepted
- * application to the school's Telegram admin chat (see src/lib/telegram.ts).
+ * application to every Telegram admin chat (see src/lib/telegram.ts).
  *
- *   TELEGRAM_BOT_TOKEN   bot that is a member of the admin chat
- *   TELEGRAM_CHAT_ID     chat / group id that receives the leads
+ *   TELEGRAM_BOT_TOKEN   bot that every admin has started
+ *   TELEGRAM_CHAT_IDS    comma-separated chat ids that all receive each lead
  *
  * With nothing configured the endpoint answers 503 and the form shows an honest
  * fallback (call / write on Telegram). Nothing is ever pretended to be "sent".
@@ -74,7 +74,7 @@ export async function POST(req: Request) {
   const { lead } = v;
 
   if (!isTelegramConfigured()) {
-    console.warn("[trial] Lead received but TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID is not configured.");
+    console.warn("[trial] Lead received but TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_IDS is not configured.");
     return NextResponse.json(
       { ok: false, code: "NOT_CONFIGURED", error: "Onlayn qabul hozircha ulanmagan. Iltimos, qo‘ng‘iroq qiling yoki Telegramda yozing." },
       { status: 503 },
@@ -89,12 +89,14 @@ export async function POST(req: Request) {
   recent.set(lead.id, { state: "pending", at: now });
 
   try {
-    await sendTelegramLead({
+    const delivery = await sendTelegramLead({
       childName: lead.childName,
       childAge: ageLabel(lead.childAge),
       parentPhone: lead.parentPhone,
       preferredTime: TIMES[lead.preferredTime],
     });
+    // At least one admin has the lead. Any chat that failed is logged (token-free) but does not block the parent.
+    for (const f of delivery.failed) console.error(`[trial] telegram send to chat ${f.chatId} failed:`, f.reason);
   } catch (err) {
     recent.delete(lead.id); // let the parent retry
     console.error("[trial] telegram send failed:", err instanceof Error ? err.message : String(err));
