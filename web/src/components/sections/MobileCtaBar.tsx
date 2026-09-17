@@ -43,7 +43,7 @@ export function MobileCtaBar() {
             {CTA.full} <Icon name="arrow" className="size-4" />
           </Link>
           {CONTACT.phone && (
-            <a href={telHref(CONTACT.phone)} aria-label={`Qo‘ng‘iroq: ${CONTACT.phone}`} className="nav-glass grid size-13 place-items-center rounded-full border border-white/15 text-white">
+            <a href={telHref(CONTACT.phone)} aria-label={`Qo‘ng‘iroq: ${CONTACT.phone}`} className="nav-glass grid size-13 place-items-center rounded-full border border-ink/15 text-ink">
               <Icon name="phone" className="size-5" />
             </a>
           )}

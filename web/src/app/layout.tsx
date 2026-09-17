@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope, Unbounded } from "next/font/google";
 import { CONTACT, SITE, telegramHref } from "@/content/site";
+import { THEME_INIT_SCRIPT } from "@/lib/theme";
 import "./globals.css";
 
 const display = Unbounded({
@@ -95,7 +96,11 @@ function jsonLd() {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="uz" className={`${display.variable} ${body.variable}`}>
+    <html lang="uz" className={`${display.variable} ${body.variable}`} suppressHydrationWarning>
+      <head>
+        {/* Restores the saved theme before first paint — no flash. Default is dark; the system theme is never consulted. */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+      </head>
       <body>
         <a href="#asosiy" className="skip-link">
           Asosiy qismga o‘tish

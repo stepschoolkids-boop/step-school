@@ -59,10 +59,10 @@ function TiltBook({ book, index }: { book: Book; index: number }) {
         </motion.div>
       </div>
       <div className="mt-6">
-        <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.22em] text-white/45">Step 0{book.step}</p>
-        <h3 className="mt-1 font-display text-[1.15rem] font-semibold text-white">{book.title}</h3>
-        <p className="text-white/60">{book.concept}</p>
-        <p className="mt-2 text-sm leading-relaxed text-white/45">{book.promise}</p>
+        <p className="text-[0.68rem] font-extrabold uppercase tracking-[0.22em] text-ink/45">Step 0{book.step}</p>
+        <h3 className="mt-1 font-display text-[1.15rem] font-semibold text-ink">{book.title}</h3>
+        <p className="text-ink/60">{book.concept}</p>
+        <p className="mt-2 text-sm leading-relaxed text-ink/45">{book.promise}</p>
       </div>
     </article>
   );
@@ -91,7 +91,7 @@ export function Books() {
   }, []);
 
   return (
-    <section ref={ref} id="kitoblar" className="relative bg-navy-950 lg:h-[280vh]" aria-labelledby="books-title">
+    <section ref={ref} id="kitoblar" className="relative bg-canvas lg:h-[280vh]" aria-labelledby="books-title">
       <div className="relative flex flex-col justify-center overflow-hidden py-20 sm:py-28 lg:sticky lg:top-0 lg:h-svh lg:py-0 lg:pt-16">
         <div className="pointer-events-none absolute inset-0" aria-hidden="true">
           <div className="absolute left-1/2 top-[40%] h-[60vmin] w-[90vmin] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse,rgba(61,139,255,0.16),transparent_60%)]" />
@@ -103,7 +103,7 @@ export function Books() {
             id="books-title"
             title={
               <>
-                Har kitob — <span className="text-green">keyingi qadam</span>
+                Har kitob — <span className="text-green-ink">keyingi qadam</span>
               </>
             }
             text="STEP SCHOOL KIDS uchun maxsus yozilgan to‘rt kitob. Riko har sahifada bola bilan."
@@ -149,10 +149,10 @@ function ConceptsColumn() {
     <ul className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-1" aria-label="Kitoblarning asosiy xususiyatlari">
       {CONCEPTS.map((c, i) => (
         <Reveal as="li" key={c.text} delay={i * 0.06} y={14} className="glass flex items-center gap-3 rounded-2xl px-4 py-3">
-          <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-green/15 text-green">
+          <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-green/15 text-green-ink">
             <Icon name={c.icon} className="size-4.5" />
           </span>
-          <span className="text-[0.95rem] font-semibold text-white/85">{c.text}</span>
+          <span className="text-[0.95rem] font-semibold text-ink/85">{c.text}</span>
         </Reveal>
       ))}
     </ul>

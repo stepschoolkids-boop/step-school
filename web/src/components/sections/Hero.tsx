@@ -84,7 +84,7 @@ export function Hero() {
       ref={ref}
       id="hero"
       onPointerMove={onPointerMove}
-      className="grain relative isolate overflow-hidden bg-navy-950"
+      className="grain relative isolate overflow-hidden bg-canvas"
       aria-labelledby="hero-title"
     >
       {/* Ambient background — enters after the first footprint */}
@@ -127,7 +127,7 @@ export function Hero() {
             className="absolute h-[620px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(61,139,255,0.2),transparent_60%)]"
           />
         )}
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-navy-950" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-canvas" />
       </motion.div>
 
       <div className="container-x grid min-h-[100svh] grid-rows-[auto_1fr] gap-4 pt-[80px] pb-16 lg:grid-cols-[1.02fr_0.98fr] lg:grid-rows-1 lg:items-center lg:gap-8 lg:pt-[68px] lg:pb-10">
@@ -139,7 +139,8 @@ export function Hero() {
               <svg viewBox="0 0 400 400" className="absolute inset-0 h-full w-full overflow-visible" fill="none">
                 <motion.path
                   d={PATH}
-                  stroke="rgba(143,192,255,0.38)"
+
+                  className="stroke-blue-ink/40"
                   strokeWidth="2"
                   strokeDasharray="3 9"
                   strokeLinecap="round"
@@ -161,7 +162,7 @@ export function Hero() {
                   transition={{ delay: i === 0 ? t(0.25) : t(0.78 + (i - 1) * 0.16), duration: d(i === 0 ? 0.7 : 0.45), ease: EASE_OUT_EXPO }}
                 >
                   <span className="anim-pulse-ring absolute inset-0 rounded-full bg-blue-light/20" style={{ animationDelay: `${i * 0.3}s`, display: i === 0 ? "block" : "none" }} />
-                  <Footprint className="relative w-full fill-blue-light/80 drop-shadow-[0_0_14px_rgba(143,192,255,0.65)]" />
+                  <Footprint className="relative w-full fill-blue-ink/80 drop-shadow-[0_0_14px_rgba(143,192,255,0.65)]" />
                 </motion.div>
               ))}
 
@@ -185,7 +186,7 @@ export function Hero() {
                   priority
                   idle={!reduced}
                   sizes="(max-width: 640px) 56vw, (max-width: 1024px) 40vw, 36vw"
-                  className="relative w-full drop-shadow-[0_34px_44px_rgba(0,0,0,0.6)]"
+                  className="relative w-full drop-shadow-[0_34px_44px_var(--shadow-deep)]"
                 />
               </motion.div>
 
@@ -196,7 +197,7 @@ export function Hero() {
                   initial={{ opacity: 0, scale: 0.7 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: t(2.2 + f.d * 0.3), duration: d(0.6), ease: EASE_OUT_EXPO }}
-                  className={`glass absolute rounded-2xl px-3.5 py-2 font-display text-[clamp(0.7rem,2vw,0.95rem)] font-semibold text-white/90 ${reduced ? "" : "anim-float-slow"}`}
+                  className={`glass absolute rounded-2xl px-3.5 py-2 font-display text-[clamp(0.7rem,2vw,0.95rem)] font-semibold text-ink/90 ${reduced ? "" : "anim-float-slow"}`}
                   style={{ left: f.x, top: f.y, ["--r" as string]: `${f.r}deg`, animationDelay: `${f.d}s`, rotate: `${f.r}deg` }}
                 >
                   {f.text}
@@ -208,7 +209,7 @@ export function Hero() {
 
         {/* COPY */}
         <motion.div style={{ y: copyY }} className="relative z-10 order-2 lg:order-1">
-          <h1 id="hero-title" className="text-white">
+          <h1 id="hero-title" className="text-ink">
             <span className="headline-xl block whitespace-nowrap text-[clamp(4.4rem,21vw,9rem)] lg:text-[clamp(6rem,10.4vw,9.8rem)]">
               {LETTERS.map((l, i) => (
                 <span key={l} className="clip-y">
@@ -224,7 +225,7 @@ export function Hero() {
               ))}
             </span>
             <motion.span
-              className="mt-1 block font-display text-[clamp(0.95rem,3.6vw,1.65rem)] font-semibold uppercase text-blue-light"
+              className="mt-1 block font-display text-[clamp(0.95rem,3.6vw,1.65rem)] font-semibold uppercase text-blue-ink"
               initial={{ opacity: 0, letterSpacing: "0.6em", y: 8 }}
               animate={{ opacity: 1, letterSpacing: "0.3em", y: 0 }}
               transition={{ delay: t(2.5), duration: d(0.9), ease: EASE_OUT_EXPO }}
@@ -232,7 +233,7 @@ export function Hero() {
               School Kids
             </motion.span>
             <motion.span
-              className="mt-6 block max-w-[20ch] text-pretty font-sans text-[clamp(1.2rem,4.6vw,1.9rem)] font-medium leading-snug text-white/88"
+              className="mt-6 block max-w-[20ch] text-pretty font-sans text-[clamp(1.2rem,4.6vw,1.9rem)] font-medium leading-snug text-ink/88"
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: t(2.8), duration: d(0.7), ease: EASE_OUT_EXPO }}
@@ -251,7 +252,7 @@ export function Hero() {
               {CTA.full}
               <Icon name="arrow" className="size-5" />
             </Button>
-            <Link href="#kitoblar" className="inline-flex h-14 items-center justify-center gap-2 rounded-full px-5 font-bold text-white/75 transition-colors hover:text-white">
+            <Link href="#kitoblar" className="inline-flex h-14 items-center justify-center gap-2 rounded-full px-5 font-bold text-ink/75 transition-colors hover:text-ink">
               {FACTS.books} kitobni ko‘rish
               <Icon name="arrowDown" className="size-4" />
             </Link>
@@ -261,11 +262,11 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: t(3.3), duration: d(0.8) }}
-            className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-[0.85rem] font-semibold text-white/55"
+            className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-[0.85rem] font-semibold text-ink/55"
             aria-label="Dastur haqida qisqacha"
           >
             <li className="inline-flex items-center gap-2"><Footprint className="size-3 fill-green" />{FACTS.books} kitob</li>
-            <li className="inline-flex items-center gap-2"><Footprint className="size-3 fill-blue-light" />{FACTS.years} yil · {FACTS.lessons} dars</li>
+            <li className="inline-flex items-center gap-2"><Footprint className="size-3 fill-blue-ink" />{FACTS.years} yil · {FACTS.lessons} dars</li>
             <li className="inline-flex items-center gap-2"><Footprint className="size-3 fill-green" />{FACTS.lessonMinutes} daqiqalik darslar</li>
           </motion.ul>
         </motion.div>
@@ -277,11 +278,11 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: t(3.7), duration: d(0.8) }}
-        className="absolute bottom-5 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-[0.68rem] font-bold uppercase tracking-[0.24em] text-white/45 transition-colors hover:text-white lg:flex"
+        className="absolute bottom-5 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-[0.68rem] font-bold uppercase tracking-[0.24em] text-ink/45 transition-colors hover:text-ink lg:flex"
         aria-label={`Pastga — ${SITE.shortName} yo‘li`}
       >
         Qadam tashlang
-        <span className="relative block h-9 w-px overflow-hidden bg-white/15">
+        <span className="relative block h-9 w-px overflow-hidden bg-ink/15">
           <motion.span
             className="absolute inset-x-0 top-0 h-3 bg-green"
             animate={reduced ? undefined : { y: [0, 36] }}

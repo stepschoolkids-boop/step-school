@@ -22,13 +22,13 @@ export function SectionHeading({ eyebrow, title, text, align = "left", id, size 
         </p>
       </Reveal>
       <Reveal delay={0.06}>
-        <h2 id={id} className={`headline mt-5 text-balance text-white ${size === "lg" ? "text-[clamp(2.2rem,6vw,4.4rem)]" : "text-[clamp(1.9rem,4.6vw,3.2rem)]"}`}>
+        <h2 id={id} className={`headline mt-5 text-balance text-ink ${size === "lg" ? "text-[clamp(2.2rem,6vw,4.4rem)]" : "text-[clamp(1.9rem,4.6vw,3.2rem)]"}`}>
           {title}
         </h2>
       </Reveal>
       {text && (
         <Reveal delay={0.12}>
-          <p className="mt-5 max-w-xl text-pretty text-[1.02rem] leading-relaxed text-white/65 sm:text-lg">{text}</p>
+          <p className="mt-5 max-w-xl text-pretty text-[1.02rem] leading-relaxed text-ink/65 sm:text-lg">{text}</p>
         </Reveal>
       )}
     </div>
