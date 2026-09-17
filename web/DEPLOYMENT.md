@@ -78,22 +78,24 @@ Always copy the values from the provider dashboard rather than from this file.
 
 ## 3. Trial-lesson leads (env vars)
 
-`src/app/api/trial/route.ts` validates each submission server-side, then sends it to the school's
-Telegram admin chat through `src/lib/telegram.ts`:
+`src/app/api/trial/route.ts` validates each submission server-side, then sends it to every
+Telegram admin through `src/lib/telegram.ts`:
 
 | Variable | Value |
 |---|---|
 | `TELEGRAM_BOT_TOKEN` | token of the bot that posts the leads (from @BotFather) |
-| `TELEGRAM_CHAT_ID` | id of the admin chat that receives them (a user id, or a negative group id) |
+| `TELEGRAM_CHAT_IDS` | comma-separated chat ids that all receive every application, e.g. `5810421271,5253204301` (user ids, or negative group ids) |
 
 Setup:
 
 1. Create a bot in [@BotFather](https://t.me/BotFather) (`/newbot`) or reuse the school's existing bot; copy its token.
-2. Open a chat with the bot and press **Start** (for a personal admin chat), or add the bot to the admin group.
-3. Find the chat id: send a message in that chat, then open
+2. **Each admin** opens a chat with the bot and presses **Start** (a bot cannot message a user who never started it),
+   or add the bot to the admin group.
+3. Find each chat id: send a message to the bot, then open
    `https://api.telegram.org/bot<TOKEN>/getUpdates` and read `message.chat.id`. Group ids are negative.
-4. In Render → `step-school-kids-web` → **Environment**, add `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID`
-   and save. Render redeploys automatically.
+4. In Render → `step-school-kids-web` → **Environment**, add `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_IDS`
+   (all ids separated by commas, spaces allowed) and save. Render redeploys automatically.
+   The old single `TELEGRAM_CHAT_ID` is still read as a fallback when `TELEGRAM_CHAT_IDS` is unset.
 
 Each message looks like:
 
@@ -109,8 +111,9 @@ Each message looks like:
 ```
 
 The browser sends one submission id per filled form and re-uses it on retries; the server remembers
-recent ids, so a retry never produces a second Telegram message. If Telegram rejects the message the
-endpoint answers `502` with a retry hint and logs the reason (never the token).
+recent ids, so a retry never produces a second Telegram message. All admins are messaged in parallel with
+the same text; the application counts as received once at least one admin got it, and any chat that
+failed is logged (never the token). Only when every chat fails does the endpoint answer `502` with a retry hint.
 
 With nothing configured the endpoint answers `503 NOT_CONFIGURED` and the form offers the phone number
 and Telegram link instead. Nothing is ever pretended to be sent. All secrets stay on the server.

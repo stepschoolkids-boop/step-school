@@ -78,11 +78,11 @@ Phone (+998 99 141 49 48), both Telegram handles (@Stepschooladmin_Muslima, @ste
 ## Trial-lesson form
 
 `src/components/sections/TrialForm.tsx` posts to `src/app/api/trial/route.ts`, which validates the
-submission and sends it to the school's **Telegram admin chat** through a bot (`src/lib/telegram.ts`):
+submission and sends it to every **Telegram admin** through a bot (`src/lib/telegram.ts`):
 
 ```
 TELEGRAM_BOT_TOKEN=<bot token>
-TELEGRAM_CHAT_ID=<admin chat id>
+TELEGRAM_CHAT_IDS=<chat id>,<chat id>   # comma-separated; each id gets every application
 ```
 
 Each browser submission carries an id that the server remembers for a few minutes, so a retry after a
