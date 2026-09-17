@@ -2,9 +2,16 @@
 
 /* ------------------------------------------------------------------ */
 /*  STEP SCHOOL KIDS — v2 visual system                                */
-/*  Navy foundation · blue + green light · white type · footprint motif */
+/*  Navy foundation · blue + green light · footprint motif             */
+/*  Two themes: dark (default, the original design) and light.         */
+/*  Brand constants never change; the semantic layer below them flips. */
 /* ------------------------------------------------------------------ */
+
+/* `light:` variant — applies while <html data-theme="light"> */
+@custom-variant light (&:where(html[data-theme="light"], html[data-theme="light"] *));
+
 :root {
+  /* Brand constants (identical in both themes) */
   --navy-950: #050a17;
   --navy-900: #081027;
   --navy-800: #0d1a3a;
@@ -22,18 +29,56 @@
   --green-glow: rgba(47, 214, 127, 0.5);
 
   --sun: #ffc233;
-
   --white: #f5f8ff;
-  --white-70: rgba(245, 248, 255, 0.72);
-  --white-50: rgba(245, 248, 255, 0.5);
-  --white-30: rgba(245, 248, 255, 0.3);
-  --line: rgba(245, 248, 255, 0.1);
-
-  --glass: rgba(255, 255, 255, 0.05);
-  --glass-strong: rgba(255, 255, 255, 0.09);
 
   --radius-xl: 28px;
   --radius-2xl: 40px;
+}
+
+/* Semantic layer — DARK (default). `.dark-scope` re-applies it to one card inside light mode. */
+:root,
+.dark-scope {
+  --canvas: #050a17;            /* page background */
+  --surface: #081027;           /* raised surface (select options, popovers) */
+  --ink: #f5f8ff;               /* foreground: text, borders, tinted fills */
+  --line: rgba(245, 248, 255, 0.1);
+  --line-strong: rgba(245, 248, 255, 0.14);
+  --glass: rgba(255, 255, 255, 0.05);
+  --glass-strong: rgba(255, 255, 255, 0.09);
+  --card-shadow: none;
+  --blue-ink: var(--blue-light); /* blue used as text / thin strokes */
+  --green-ink: var(--green);     /* green used as text / icons */
+  --danger: #ff9a7a;
+  --coral: #ff8f74;
+  --shadow-deep: rgba(0, 0, 0, 0.6);
+  --shadow-soft: rgba(0, 0, 0, 0.45);
+  --nav-glass: rgba(5, 10, 23, 0.72);
+  --nav-shadow: rgba(0, 0, 0, 0.8);
+  --grain-opacity: 0.5;
+  color-scheme: dark;
+}
+
+/* Semantic layer — LIGHT. Designed, not inverted: cool white canvas, navy ink,
+   white cards with hairline borders and soft shadows, deeper brand accents for text. */
+html[data-theme="light"] {
+  --canvas: #f7f9ff;
+  --surface: #ffffff;
+  --ink: #0b1430;
+  --line: rgba(11, 20, 48, 0.1);
+  --line-strong: rgba(11, 20, 48, 0.14);
+  --glass: rgba(255, 255, 255, 0.72);
+  --glass-strong: rgba(255, 255, 255, 0.92);
+  --card-shadow: 0 18px 40px -24px rgba(11, 20, 48, 0.28);
+  --blue-ink: var(--blue-deep);
+  --green-ink: #128a52;
+  --danger: #c23a1a;
+  --coral: #d94a2b;
+  --shadow-deep: rgba(11, 20, 48, 0.3);
+  --shadow-soft: rgba(11, 20, 48, 0.18);
+  --nav-glass: rgba(247, 249, 255, 0.78);
+  --nav-shadow: rgba(11, 20, 48, 0.16);
+  --grain-opacity: 0.22;
+  color-scheme: light;
 }
 
 @theme inline {
@@ -50,9 +95,19 @@
   --color-green-light: var(--green-light);
   --color-sun: var(--sun);
   --color-white: var(--white);
+
+  /* theme-aware */
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
   --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
   --color-glass: var(--glass);
   --color-glass-strong: var(--glass-strong);
+  --color-blue-ink: var(--blue-ink);
+  --color-green-ink: var(--green-ink);
+  --color-danger: var(--danger);
+  --color-coral: var(--coral);
 
   --font-display: var(--font-display), "Unbounded", system-ui, sans-serif;
   --font-sans: var(--font-body), "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -66,7 +121,7 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
-  background: var(--navy-950);
+  background: var(--canvas);
 }
 
 html,
@@ -75,8 +130,8 @@ body {
 }
 
 body {
-  background: var(--navy-950);
-  color: var(--white);
+  background: var(--canvas);
+  color: var(--ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -88,7 +143,7 @@ body {
 }
 
 :focus-visible {
-  outline: 3px solid var(--blue-light);
+  outline: 3px solid var(--blue-ink);
   outline-offset: 3px;
   border-radius: 8px;
 }
@@ -123,27 +178,29 @@ body {
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--blue-light);
+  color: var(--blue-ink);
 }
 
 @utility glass {
   background: var(--glass);
   border: 1px solid var(--line);
+  box-shadow: var(--card-shadow);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
 
 @utility glass-strong {
   background: var(--glass-strong);
-  border: 1px solid rgba(245, 248, 255, 0.14);
+  border: 1px solid var(--line-strong);
+  box-shadow: var(--card-shadow);
 }
 
 @utility text-muted {
-  color: var(--white-70);
+  color: color-mix(in oklab, var(--ink) 72%, transparent);
 }
 
 @utility text-faint {
-  color: var(--white-50);
+  color: color-mix(in oklab, var(--ink) 50%, transparent);
 }
 
 /* Display type — Unbounded, tight, heavy */
@@ -166,7 +223,7 @@ body {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.5;
+  opacity: var(--grain-opacity);
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
@@ -259,11 +316,11 @@ body {
 
 .btn-secondary {
   background: transparent;
-  color: var(--white);
-  border: 1.5px solid rgba(245, 248, 255, 0.22);
+  color: var(--ink);
+  border: 1.5px solid color-mix(in oklab, var(--ink) 22%, transparent);
   transition: border-color 0.2s ease, background-color 0.2s ease;
 }
-.btn-secondary:hover { border-color: rgba(245, 248, 255, 0.6); background: rgba(255, 255, 255, 0.06); }
+.btn-secondary:hover { border-color: color-mix(in oklab, var(--ink) 60%, transparent); background: color-mix(in oklab, var(--ink) 6%, transparent); }
 
 /* Book 3D */
 .book-scene { perspective: 1400px; }
@@ -304,7 +361,7 @@ body {
 .snap-x-scroller > * { scroll-snap-align: center; flex: 0 0 auto; }
 
 .nav-glass {
-  background: rgba(5, 10, 23, 0.72);
+  background: var(--nav-glass);
   backdrop-filter: saturate(160%) blur(16px);
   -webkit-backdrop-filter: saturate(160%) blur(16px);
 }
@@ -324,6 +381,60 @@ body {
 
 /* Clip wrapper for kinetic letters */
 .clip-y { overflow: hidden; display: inline-block; vertical-align: bottom; padding-bottom: 0.06em; }
+
+/* Light theme: the faint footprint pattern is drawn in ink instead of white */
+html[data-theme="light"] .bg-footprints {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='420' viewBox='0 0 360 420'%3E%3Cg fill='%230b1430' fill-opacity='0.035'%3E%3Cg transform='translate(40 30) rotate(-18) scale(0.5)'%3E%3Cellipse cx='50' cy='66' rx='27' ry='21'/%3E%3Ccircle cx='19' cy='41' r='10'/%3E%3Ccircle cx='39' cy='26' r='11'/%3E%3Ccircle cx='61' cy='26' r='11'/%3E%3Ccircle cx='81' cy='41' r='10'/%3E%3C/g%3E%3Cg transform='translate(230 240) rotate(14) scale(0.5)'%3E%3Cellipse cx='50' cy='66' rx='27' ry='21'/%3E%3Ccircle cx='19' cy='41' r='10'/%3E%3Ccircle cx='39' cy='26' r='11'/%3E%3Ccircle cx='61' cy='26' r='11'/%3E%3Ccircle cx='81' cy='41' r='10'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Light theme: the faintest text tiers (captions, footer meta) are lifted so small text stays ≥ 4.5:1 on the canvas.
+   Dark mode keeps the original tiers. Fills and borders are not affected. */
+html[data-theme="light"] :is(.text-ink\/35, .text-ink\/40, .text-ink\/45) { color: color-mix(in oklab, var(--ink) 62%, transparent); }
+html[data-theme="light"] :is(.text-ink\/50, .text-ink\/55) { color: color-mix(in oklab, var(--ink) 70%, transparent); }
+html[data-theme="light"] .placeholder\:text-ink\/35::placeholder { color: color-mix(in oklab, var(--ink) 55%, transparent); }
+
+/* Native <select> chevron, drawn in the current theme's ink */
+.select-arrow {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f8ff' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-position: right 1rem center;
+  background-repeat: no-repeat;
+}
+html[data-theme="light"] .select-arrow {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%230b1430' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+/* Theme toggle — moon (dark) and sun (light) morph in place */
+.theme-toggle .icon-sun,
+.theme-toggle .icon-moon {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease;
+}
+.theme-toggle .icon-sun { opacity: 0; transform: rotate(-90deg) scale(0.4); }
+html[data-theme="light"] .theme-toggle .icon-sun { opacity: 1; transform: none; }
+html[data-theme="light"] .theme-toggle .icon-moon { opacity: 0; transform: rotate(90deg) scale(0.4); }
+
+/* While switching themes (≈450 ms) every colour, border and shadow eases instead of snapping.
+   Transforms and opacity are left alone so the scroll-driven motion keeps its own timing. */
+html.theme-switching,
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition:
+    background-color 0.45s ease,
+    background 0.45s ease,
+    color 0.45s ease,
+    border-color 0.45s ease,
+    fill 0.45s ease,
+    stroke 0.45s ease,
+    box-shadow 0.45s ease,
+    outline-color 0.45s ease !important;
+}
+html.theme-switching .theme-toggle .icon-sun,
+html.theme-switching .theme-toggle .icon-moon {
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease, color 0.45s ease !important;
+}
 
 /* ------------------------------------------------------------------ */
 /*  Reduced motion                                                     */

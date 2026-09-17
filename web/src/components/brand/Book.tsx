@@ -23,7 +23,7 @@ export function Book({ book, className = "", priority = false, sizes = "(max-wid
   return (
     <div className={`relative ${className}`}>
       <div
-        className="book-3d relative w-full select-none rounded-[6px_14px_14px_6px] shadow-[0_40px_60px_-28px_rgba(0,0,0,0.75),0_12px_24px_-12px_rgba(0,0,0,0.6)]"
+        className="book-3d relative w-full select-none rounded-[6px_14px_14px_6px] shadow-[0_40px_60px_-28px_var(--shadow-deep),0_12px_24px_-12px_var(--shadow-soft)]"
         style={{ aspectRatio: `${cover.width} / ${cover.height}` }}
       >
         <span className="book-spine" style={{ background: "rgba(0,0,0,0.45)" }} aria-hidden="true" />
@@ -44,7 +44,7 @@ export function Book({ book, className = "", priority = false, sizes = "(max-wid
       </div>
       {withRiko && (
         <span
-          className="pointer-events-none absolute -bottom-[3%] -right-[38%] block w-[54%] drop-shadow-[0_18px_24px_rgba(0,0,0,0.55)]"
+          className="pointer-events-none absolute -bottom-[3%] -right-[38%] block w-[54%] drop-shadow-[0_18px_24px_var(--shadow-deep)]"
           style={{ aspectRatio: `${riko.width} / ${riko.height}` }}
           aria-hidden="true"
         >

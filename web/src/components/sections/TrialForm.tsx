@@ -30,7 +30,7 @@ function formatPhone(raw: string): string {
 }
 
 const inputCls =
-  "h-13 w-full rounded-2xl border border-white/15 bg-white/[0.06] px-4 text-[1rem] text-white placeholder:text-white/35 transition-colors focus:border-green focus:bg-white/[0.08] focus:outline-none aria-[invalid=true]:border-[#ff9a7a]";
+  "h-13 w-full rounded-2xl border border-ink/15 bg-ink/[0.06] px-4 text-[1rem] text-ink placeholder:text-ink/35 transition-colors focus:border-green focus:bg-ink/[0.08] focus:outline-none aria-[invalid=true]:border-danger";
 
 /**
  * Trial-lesson form. Posts to /api/trial (Telegram forwarding when configured);
@@ -122,10 +122,10 @@ export function TrialForm() {
               <span className="absolute inset-0 -z-10 scale-125 rounded-full bg-green/20 blur-xl" aria-hidden="true" />
               <Riko variant="win" idle sizes="160px" className="w-40" />
             </div>
-            <h3 className="headline mt-6 text-3xl text-white">Arizangiz qabul qilindi!</h3>
-            <p className="mt-3 max-w-sm text-white/70">{RESPONSE_PROMISE ?? "Tez orada siz bilan bog‘lanamiz."}</p>
-            <p className="mt-1 text-sm text-white/45">Riko sizni sinov darsida kutadi.</p>
-            <button type="button" onClick={() => setStatus("idle")} className="mt-8 text-sm font-bold text-green underline-offset-4 hover:underline">
+            <h3 className="headline mt-6 text-3xl text-ink">Arizangiz qabul qilindi!</h3>
+            <p className="mt-3 max-w-sm text-ink/70">{RESPONSE_PROMISE ?? "Tez orada siz bilan bog‘lanamiz."}</p>
+            <p className="mt-1 text-sm text-ink/45">Riko sizni sinov darsida kutadi.</p>
+            <button type="button" onClick={() => setStatus("idle")} className="mt-8 text-sm font-bold text-green-ink underline-offset-4 hover:underline">
               Yana bir ariza qoldirish
             </button>
           </motion.div>
@@ -133,21 +133,21 @@ export function TrialForm() {
           <motion.form key="form" noValidate onSubmit={onSubmit} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="grid gap-5" aria-describedby={`${id}-hint`}>
             <div className="grid gap-5 sm:grid-cols-[1fr_150px]">
               <div>
-                <label htmlFor={`${id}-name`} className="mb-1.5 block text-sm font-bold text-white/85">
+                <label htmlFor={`${id}-name`} className="mb-1.5 block text-sm font-bold text-ink/85">
                   Farzandingiz ismi
                 </label>
                 <input id={`${id}-name`} name="childName" type="text" autoComplete="off" placeholder="Masalan, Aziza" className={inputCls} aria-invalid={!!errors.childName} aria-describedby={errors.childName ? `${id}-name-err` : undefined} />
-                {errors.childName && <p id={`${id}-name-err`} className="mt-1.5 text-sm font-semibold text-[#ff9a7a]">{errors.childName}</p>}
+                {errors.childName && <p id={`${id}-name-err`} className="mt-1.5 text-sm font-semibold text-danger">{errors.childName}</p>}
               </div>
               <div>
-                <label htmlFor={`${id}-age`} className="mb-1.5 block text-sm font-bold text-white/85">
+                <label htmlFor={`${id}-age`} className="mb-1.5 block text-sm font-bold text-ink/85">
                   Yoshi
                 </label>
                 <select
                   id={`${id}-age`}
                   name="childAge"
                   defaultValue=""
-                  className={`${inputCls} appearance-none bg-[url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f8ff' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")] bg-[position:right_1rem_center] bg-no-repeat pr-10 [&>option]:bg-navy-900 [&>option]:text-white`}
+                  className={`${inputCls} select-arrow appearance-none pr-10 [&>option]:bg-surface [&>option]:text-ink`}
                   aria-invalid={!!errors.childAge}
                   aria-describedby={errors.childAge ? `${id}-age-err` : undefined}
                 >
@@ -161,12 +161,12 @@ export function TrialForm() {
                   ))}
                   <option value="boshqa">Boshqa</option>
                 </select>
-                {errors.childAge && <p id={`${id}-age-err`} className="mt-1.5 text-sm font-semibold text-[#ff9a7a]">{errors.childAge}</p>}
+                {errors.childAge && <p id={`${id}-age-err`} className="mt-1.5 text-sm font-semibold text-danger">{errors.childAge}</p>}
               </div>
             </div>
 
             <div>
-              <label htmlFor={`${id}-phone`} className="mb-1.5 block text-sm font-bold text-white/85">
+              <label htmlFor={`${id}-phone`} className="mb-1.5 block text-sm font-bold text-ink/85">
                 Ota-onaning telefon raqami
               </label>
               <input
@@ -182,11 +182,11 @@ export function TrialForm() {
                 aria-invalid={!!errors.parentPhone}
                 aria-describedby={errors.parentPhone ? `${id}-phone-err` : undefined}
               />
-              {errors.parentPhone && <p id={`${id}-phone-err`} className="mt-1.5 text-sm font-semibold text-[#ff9a7a]">{errors.parentPhone}</p>}
+              {errors.parentPhone && <p id={`${id}-phone-err`} className="mt-1.5 text-sm font-semibold text-danger">{errors.parentPhone}</p>}
             </div>
 
             <fieldset>
-              <legend className="mb-1.5 block text-sm font-bold text-white/85">Qo‘ng‘iroq uchun qulay vaqt</legend>
+              <legend className="mb-1.5 block text-sm font-bold text-ink/85">Qo‘ng‘iroq uchun qulay vaqt</legend>
               <div className="grid grid-cols-2 gap-2 sm:grid-cols-4" role="radiogroup" aria-invalid={!!errors.preferredTime}>
                 {TIMES.map((t) => {
                   const checked = time === t.v;
@@ -194,7 +194,7 @@ export function TrialForm() {
                     <label
                       key={t.v}
                       className={`flex h-12 cursor-pointer items-center justify-center rounded-2xl border text-sm font-bold transition-colors has-[:focus-visible]:outline has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-blue-light ${
-                        checked ? "border-green bg-green/15 text-green" : "border-white/12 bg-white/[0.04] text-white/70 hover:border-white/30"
+                        checked ? "border-green bg-green/15 text-green-ink" : "border-ink/12 bg-ink/[0.04] text-ink/70 hover:border-ink/30"
                       }`}
                     >
                       <input type="radio" name="preferredTime" value={t.v} checked={checked} onChange={() => setTime(t.v)} className="sr-only" />
@@ -203,22 +203,22 @@ export function TrialForm() {
                   );
                 })}
               </div>
-              {errors.preferredTime && <p className="mt-1.5 text-sm font-semibold text-[#ff9a7a]">{errors.preferredTime}</p>}
+              {errors.preferredTime && <p className="mt-1.5 text-sm font-semibold text-danger">{errors.preferredTime}</p>}
             </fieldset>
 
             {status === "error" && serverError && (
-              <div role="alert" className="rounded-2xl border border-[#ff9a7a]/40 bg-[#ff9a7a]/10 p-4 text-sm text-white">
-                <p className="font-bold text-[#ffb59e]">{serverError}</p>
+              <div role="alert" className="rounded-2xl border border-danger/40 bg-danger/10 p-4 text-sm text-ink">
+                <p className="font-bold text-danger">{serverError}</p>
                 {notConfigured && (CONTACT.phone || CONTACT.telegramUsername) && (
                   <div className="mt-3 flex flex-wrap gap-2">
                     {CONTACT.phone && (
-                      <a href={telHref(CONTACT.phone)} className="inline-flex h-10 items-center gap-2 rounded-full bg-white px-4 font-bold text-navy-950">
+                      <a href={telHref(CONTACT.phone)} className="inline-flex h-10 items-center gap-2 rounded-full bg-ink px-4 font-bold text-canvas">
                         <Icon name="phone" className="size-4" /> {CONTACT.phone}
                       </a>
                     )}
                     {CONTACT.telegramUsername && (
-                      <a href={telegramHref(CONTACT.telegramUsername)} target="_blank" rel="noopener noreferrer" className="inline-flex h-10 items-center gap-2 rounded-full border border-white/25 px-4 font-bold">
-                        <Icon name="telegram" className="size-4 text-blue-light" /> @{CONTACT.telegramUsername}
+                      <a href={telegramHref(CONTACT.telegramUsername)} target="_blank" rel="noopener noreferrer" className="inline-flex h-10 items-center gap-2 rounded-full border border-ink/25 px-4 font-bold">
+                        <Icon name="telegram" className="size-4 text-blue-ink" /> @{CONTACT.telegramUsername}
                       </a>
                     )}
                   </div>
@@ -238,7 +238,7 @@ export function TrialForm() {
                 </>
               )}
             </Button>
-            <p id={`${id}-hint`} className="text-center text-xs text-white/40">
+            <p id={`${id}-hint`} className="text-center text-xs text-ink/40">
               Raqamingiz faqat sinov darsini kelishish uchun ishlatiladi.
             </p>
           </motion.form>

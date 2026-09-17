@@ -149,6 +149,13 @@ const PATHS: Record<string, React.ReactNode> = {
   arrowDown: <path d="M12 5v14m-6-6 6 6 6-6" />,
   spark: <path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" />,
   menu: <path d="M4 7h16M4 12h16M4 17h16" />,
+  sun: (
+    <>
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4m11.4-11.4 1.4-1.4" />
+    </>
+  ),
+  moon: <path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1z" />,
   close: <path d="M6 6l12 12M18 6 6 18" />,
   timer: (
     <>

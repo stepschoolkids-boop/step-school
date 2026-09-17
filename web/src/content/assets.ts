@@ -26,6 +26,8 @@ export const ASSETS = {
   brand: {
     /** Primary logo — paw mark + "Step Kids" wordmark, horizontal, transparent background. */
     logo: { src: "/assets/brand/logo.png", width: 254, height: 114, alt: "STEP SCHOOL KIDS" } satisfies ImageAsset,
+    /** Same wordmark with navy letters — used on the light theme (white letters would vanish). */
+    logoLight: { src: "/assets/brand/logo-light.png", width: 254, height: 114, alt: "STEP SCHOOL KIDS" } satisfies ImageAsset,
     /** Paw mark only — used for compact contexts (app icon, small badges). */
     logoMark: { src: "/assets/brand/logo-mark.png", width: 168, height: 170, alt: "STEP SCHOOL KIDS" } satisfies ImageAsset,
   },
@@ -49,6 +51,7 @@ export const ASSETS = {
 /** Every file the site expects — used by `npm run assets:check`. */
 export const ASSET_FILES: string[] = [
   ASSETS.brand.logo.src,
+  ASSETS.brand.logoLight.src,
   ASSETS.brand.logoMark.src,
   ...Object.values(ASSETS.riko).map((a) => a.src),
   ...Object.values(ASSETS.books).map((a) => a.src),

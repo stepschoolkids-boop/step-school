@@ -19,7 +19,7 @@ type ButtonProps = {
 const base =
   "inline-flex items-center justify-center gap-2 rounded-full font-sans font-bold tracking-tight whitespace-nowrap disabled:cursor-not-allowed disabled:opacity-60 select-none";
 const sizes = { md: "h-12 px-6 text-[1rem]", lg: "h-14 px-8 text-[1.06rem]" };
-const variants = { primary: "btn-primary", secondary: "btn-secondary", ghost: "text-white hover:bg-white/8" };
+const variants = { primary: "btn-primary", secondary: "btn-secondary", ghost: "text-ink hover:bg-ink/8" };
 
 /**
  * Magnetic button: leans toward the cursor on fine-pointer devices (transform only).

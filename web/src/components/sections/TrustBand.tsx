@@ -21,7 +21,7 @@ const TEACHER_POINTS = [
  */
 export function TrustBand() {
   return (
-    <section id="narxlar" className="relative bg-navy-950 py-20 sm:py-28 lg:py-32" aria-labelledby="trust-title">
+    <section id="narxlar" className="relative bg-canvas py-20 sm:py-28 lg:py-32" aria-labelledby="trust-title">
       <div className="container-x">
         <h2 id="trust-title" className="sr-only">
           Narx va ustozlar
@@ -38,31 +38,31 @@ export function TrustBand() {
               {PRICE ? (
                 <>
                   <p className="mt-5 flex flex-wrap items-baseline gap-x-3">
-                    <span className="headline whitespace-nowrap text-[clamp(1.7rem,7vw,3.4rem)] text-green">{PRICE.monthly}</span>
-                    <span className="font-display text-lg font-semibold text-white/60">{PRICE.monthlyNote}</span>
+                    <span className="headline whitespace-nowrap text-[clamp(1.7rem,7vw,3.4rem)] text-green-ink">{PRICE.monthly}</span>
+                    <span className="font-display text-lg font-semibold text-ink/60">{PRICE.monthlyNote}</span>
                   </p>
                   {PRICE.included.length > 0 && (
-                    <ul className="mt-4 grid gap-2 text-white/85">
+                    <ul className="mt-4 grid gap-2 text-ink/85">
                       {PRICE.included.map((x) => (
                         <li key={x} className="flex items-center gap-2">
-                          <Icon name="check" className="size-4 text-green" /> {x}
+                          <Icon name="check" className="size-4 text-green-ink" /> {x}
                         </li>
                       ))}
                     </ul>
                   )}
-                  {PRICE.bookCost && <p className="mt-3 text-sm text-white/60">{PRICE.bookCost}</p>}
-                  {PRICE.payment && <p className="mt-1 text-sm text-white/60">{PRICE.payment}</p>}
+                  {PRICE.bookCost && <p className="mt-3 text-sm text-ink/60">{PRICE.bookCost}</p>}
+                  {PRICE.payment && <p className="mt-1 text-sm text-ink/60">{PRICE.payment}</p>}
                 </>
               ) : (
-                <p className="headline mt-5 text-[clamp(1.4rem,3vw,2rem)] text-white">Narx — so‘rov bo‘yicha</p>
+                <p className="headline mt-5 text-[clamp(1.4rem,3vw,2rem)] text-ink">Narx — so‘rov bo‘yicha</p>
               )}
 
               {GROUPS.length > 0 && (
-                <ul className="mt-5 divide-y divide-white/10 text-sm">
+                <ul className="mt-5 divide-y divide-ink/10 text-sm">
                   {GROUPS.map((g) => (
                     <li key={`${g.group}-${g.time}`} className="flex flex-wrap justify-between gap-2 py-3">
-                      <span className="font-semibold text-white">{g.group}</span>
-                      <span className="text-white/65">
+                      <span className="font-semibold text-ink">{g.group}</span>
+                      <span className="text-ink/65">
                         {g.age} · {g.days} · {g.time}
                         {g.placesLeft !== undefined && ` · ${g.placesLeft} joy`}
                       </span>
@@ -71,7 +71,7 @@ export function TrustBand() {
                 </ul>
               )}
 
-              <p className="mt-5 max-w-md text-pretty text-[1.02rem] leading-relaxed text-white/65">
+              <p className="mt-5 max-w-md text-pretty text-[1.02rem] leading-relaxed text-ink/65">
                 Sinov darsi — bepul. Farzandingiz yoshiga mos guruh va dars kunlarini administrator bilan kelishib olasiz.
               </p>
               <Link href={CTA.href} className="btn-primary mt-7 inline-flex h-13 w-full items-center justify-center gap-2 rounded-full font-bold sm:w-auto sm:px-7">
@@ -81,46 +81,46 @@ export function TrustBand() {
           </Reveal>
 
           {/* Teachers */}
-          <Reveal id="oqituvchilar" delay={0.1} className="relative overflow-hidden rounded-[var(--radius-2xl)] bg-[linear-gradient(160deg,#0f2a5c,#0b1a3a_60%,#0a2a2c)] p-7 sm:p-10">
+          <Reveal id="oqituvchilar" delay={0.1} className="dark-scope relative overflow-hidden rounded-[var(--radius-2xl)] bg-[linear-gradient(160deg,#0f2a5c,#0b1a3a_60%,#0a2a2c)] p-7 shadow-[var(--card-shadow)] sm:p-10">
             <div className="pointer-events-none absolute -right-16 -top-16 size-56 rounded-full bg-green/25 blur-3xl" aria-hidden="true" />
             <p className="eyebrow">
               <Footprint className="size-3 fill-current" />
               Ustozlarimiz
             </p>
-            <h3 className="headline mt-4 text-balance text-[clamp(1.5rem,3.2vw,2.1rem)] text-white">Malakali ustozlar — bolangizga to‘g‘ri yondashuv</h3>
-            <p className="mt-4 text-pretty leading-relaxed text-white/72">
+            <h3 className="headline mt-4 text-balance text-[clamp(1.5rem,3.2vw,2.1rem)] text-ink">Malakali ustozlar — bolangizga to‘g‘ri yondashuv</h3>
+            <p className="mt-4 text-pretty leading-relaxed text-ink/72">
               Ustozlarimiz malakali va tajribali. Ular bolalar bilan ishlashni yaxshi biladi, har bir o‘quvchining darajasiga mos yondashadi va
               mavzularni tushunarli tarzda yetkazadi.
             </p>
             <ul className="mt-6 grid gap-2.5">
               {TEACHER_POINTS.map((x) => (
-                <li key={x} className="flex items-start gap-2.5 text-white/88">
-                  <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-green/20 text-green">
+                <li key={x} className="flex items-start gap-2.5 text-ink/88">
+                  <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-green/20 text-green-ink">
                     <Icon name="check" className="size-3" />
                   </span>
                   {x}
                 </li>
               ))}
             </ul>
-            <p className="mt-5 text-sm text-white/50">Ustozlar bolalar bilan ishlash xususiyatlarini hisobga olgan aniq mezonlar asosida tanlanadi.</p>
+            <p className="mt-5 text-sm text-ink/50">Ustozlar bolalar bilan ishlash xususiyatlarini hisobga olgan aniq mezonlar asosida tanlanadi.</p>
 
             {TEACHERS.length > 0 && (
               <ul className="mt-5 flex flex-wrap gap-3" aria-label="O‘qituvchilar">
                 {TEACHERS.map((t) => (
-                  <li key={t.name} className="flex items-center gap-3 rounded-full bg-white/[0.06] py-1.5 pl-1.5 pr-4">
+                  <li key={t.name} className="flex items-center gap-3 rounded-full bg-ink/[0.06] py-1.5 pl-1.5 pr-4">
                     <span className="relative size-9 overflow-hidden rounded-full bg-green/20">
                       {t.photo && <Image src={t.photo} alt="" fill sizes="36px" className="object-cover" />}
                     </span>
                     <span className="text-sm">
-                      <span className="block font-semibold text-white">{t.name}</span>
-                      <span className="block text-xs text-white/50">{t.role}</span>
+                      <span className="block font-semibold text-ink">{t.name}</span>
+                      <span className="block text-xs text-ink/50">{t.role}</span>
                     </span>
                   </li>
                 ))}
               </ul>
             )}
 
-            <Link href={CTA.href} className="mt-6 inline-flex items-center gap-2 font-bold text-green underline-offset-4 hover:underline">
+            <Link href={CTA.href} className="mt-6 inline-flex items-center gap-2 font-bold text-green-ink underline-offset-4 hover:underline">
               Ustoz bilan sinov darsida tanishing <Icon name="arrow" className="size-4" />
             </Link>
           </Reveal>

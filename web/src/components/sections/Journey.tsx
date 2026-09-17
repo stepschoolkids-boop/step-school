@@ -7,9 +7,12 @@ import { Footprint } from "@/components/brand/Footprint";
 import { Riko } from "@/components/brand/Riko";
 import { BOOKS } from "@/content/books";
 import { EASE_OUT_EXPO, usePrefersReducedMotion } from "@/lib/motion";
+import { useTheme } from "@/lib/theme";
 
 const WORDS = ["START", "SPEAK", "READ", "WIN"];
-const BG = ["#050a17", "#0a1a3f", "#082a2c", "#050a17"];
+const BG_STOPS = [0, 0.33, 0.66, 1];
+const BG_DARK = ["#050a17", "#0a1a3f", "#082a2c", "#050a17"];
+const BG_LIGHT = ["#f7f9ff", "#e4edff", "#e2f6ec", "#f7f9ff"];
 
 /** Footprints along the stage path (percent of stage width / height). */
 const PRINTS = [4, 13, 22, 31, 40, 49, 58, 67, 76, 85].map((x, i) => ({ x, y: 78 - (i % 2) * 10, r: i % 2 ? 10 : -8 }));
@@ -21,6 +24,7 @@ const PRINTS = [4, 13, 22, 31, 40, 49, 58, 67, 76, 85].map((x, i) => ({ x, y: 78
 export function Journey() {
   const ref = useRef<HTMLElement>(null);
   const reduced = usePrefersReducedMotion();
+  const theme = useTheme();
   const [active, setActive] = useState(0);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
 
@@ -29,14 +33,17 @@ export function Journey() {
     if (i !== active) setActive(i);
   });
 
-  const bg = useTransform(scrollYProgress, [0, 0.33, 0.66, 1], BG);
+  const bgDark = useTransform(scrollYProgress, BG_STOPS, BG_DARK);
+  const bgLight = useTransform(scrollYProgress, BG_STOPS, BG_LIGHT);
+  const palette = theme === "light" ? BG_LIGHT : BG_DARK;
+  const bg = theme === "light" ? bgLight : bgDark;
   const rikoLeft = useTransform(scrollYProgress, [0.02, 0.98], ["2%", "74%"]);
   const trail = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const book = BOOKS[active];
 
   return (
     <section ref={ref} id="yol" className="relative h-[400vh]" aria-labelledby="journey-title">
-      <motion.div style={{ background: reduced ? BG[0] : bg }} className="grain sticky top-0 h-svh overflow-hidden">
+      <motion.div style={{ background: reduced ? palette[0] : bg }} className="grain sticky top-0 h-svh overflow-hidden">
         {/* tone glow */}
         <AnimatePresence>
           <motion.div
@@ -60,12 +67,12 @@ export function Journey() {
                 <Footprint className="size-3 fill-current" />
                 Birinchi qadam
               </p>
-              <h2 id="journey-title" className="headline mt-3 text-[clamp(1.4rem,3.2vw,2rem)] text-white/90">
+              <h2 id="journey-title" className="headline mt-3 text-[clamp(1.4rem,3.2vw,2rem)] text-ink/90">
                 Bir yil. To‘rt qadam.
               </h2>
             </div>
-            <p className="font-display text-sm font-semibold text-white/50 tabular-nums" aria-live="polite">
-              0{active + 1} <span className="text-white/25">/ 0{BOOKS.length}</span>
+            <p className="font-display text-sm font-semibold text-ink/50 tabular-nums" aria-live="polite">
+              0{active + 1} <span className="text-ink/25">/ 0{BOOKS.length}</span>
             </p>
           </div>
 
@@ -77,6 +84,7 @@ export function Journey() {
                   <motion.p
                     key={active}
                     className={`headline-xl absolute bottom-0 left-0 whitespace-nowrap text-[clamp(3.2rem,15vw,14rem)] ${book.textClass}`}
+                    style={theme === "light" ? { color: book.color } : undefined} // pastel tints suit navy; light mode uses the saturated cover colour
                     initial={{ y: reduced ? 0 : "70%", opacity: 0 }}
                     animate={{ y: "0%", opacity: 1 }}
                     exit={{ y: reduced ? 0 : "-70%", opacity: 0 }}
@@ -95,8 +103,8 @@ export function Journey() {
                   transition={{ duration: 0.4 }}
                   className="mt-3"
                 >
-                  <p className="font-display text-[clamp(1.1rem,3.4vw,1.8rem)] font-semibold text-white">{book.concept}</p>
-                  <p className="mt-1 text-sm font-semibold text-white/50">
+                  <p className="font-display text-[clamp(1.1rem,3.4vw,1.8rem)] font-semibold text-ink">{book.concept}</p>
+                  <p className="mt-1 text-sm font-semibold text-ink/50">
                     Step 0{book.step} · {book.title}
                   </p>
                 </motion.div>
@@ -132,7 +140,7 @@ export function Journey() {
         {/* stage: path + trail + Riko */}
         <div className="pointer-events-none absolute inset-x-0 bottom-16 h-[30svh] sm:bottom-0 lg:h-[32svh]" aria-hidden="true">
           <svg viewBox="0 0 1000 300" preserveAspectRatio="none" className="absolute inset-0 h-full w-full">
-            <path d="M0 235 C 200 205, 300 265, 500 235 S 800 205, 1000 235" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="2" strokeDasharray="5 12" vectorEffect="non-scaling-stroke" />
+            <path d="M0 235 C 200 205, 300 265, 500 235 S 800 205, 1000 235" fill="none" className="stroke-line" strokeWidth="2" strokeDasharray="5 12" vectorEffect="non-scaling-stroke" />
             <motion.path
               d="M0 235 C 200 205, 300 265, 500 235 S 800 205, 1000 235"
               fill="none"
@@ -158,18 +166,18 @@ export function Journey() {
                   transition={{ duration: 0.45, ease: EASE_OUT_EXPO }}
                   className="absolute inset-0"
                 >
-                  <Riko variant={book.key} decorative sizes="(max-width: 640px) 30vw, 220px" className="w-full drop-shadow-[0_30px_40px_rgba(0,0,0,0.5)]" />
+                  <Riko variant={book.key} decorative sizes="(max-width: 640px) 30vw, 220px" className="w-full drop-shadow-[0_30px_40px_var(--shadow-deep)]" />
                 </motion.div>
               </AnimatePresence>
             </div>
           </motion.div>
-          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-navy-950" />
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-canvas" />
         </div>
 
         {/* progress */}
         <div className="absolute right-5 top-1/2 hidden -translate-y-1/2 flex-col gap-2 lg:flex" aria-hidden="true">
           {BOOKS.map((b, i) => (
-            <span key={b.step} className={`h-8 w-1 rounded-full transition-colors duration-500 ${i <= active ? "bg-green" : "bg-white/15"}`} />
+            <span key={b.step} className={`h-8 w-1 rounded-full transition-colors duration-500 ${i <= active ? "bg-green" : "bg-ink/15"}`} />
           ))}
         </div>
       </motion.div>
